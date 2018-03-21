@@ -3,7 +3,7 @@ class CreateArticles < ActiveRecord::Migration[5.1]
     create_table :articles do |t|
       t.integer :source_id
       t.string :title
-      t.date :date
+      t.datetime :date
       t.string :url
       t.boolean :favorite, default: false
       t.boolean :read, default: false

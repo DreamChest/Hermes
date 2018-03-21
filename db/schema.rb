@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20180320133748) do
   create_table "articles", force: :cascade do |t|
     t.integer "source_id"
     t.string "title"
-    t.date "date"
+    t.datetime "date"
     t.string "url"
     t.boolean "favorite", default: false
     t.boolean "read", default: false
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180320133748) do
     t.string "url"
     t.string "favicon_path"
     t.string "favicon_url"
+    t.datetime "last_update", default: "1970-01-01 00:00:00"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -45,3 +45,4 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'feedjira' # RSS fetching and parsing
 gem 'jwt' # Token-based authentication
 gem 'simple_command'
+gem 'validate_url' # URL validations

@@ -1,14 +1,26 @@
+class FeedValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    record.feed = Feedjira::Feed.fetch_and_parse(value)
+  rescue StandardError
+    record.errors[attribute] << 'must be a valid RSS feed URL'
+  end
+end
+
 class Source < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_and_belongs_to_many :tags
 
   validates :name, :url, presence: true, uniqueness: true
+  validates :url, url: true, feed: true
 
   attr_accessor :feed, :new_articles
 
   def fetch
     self.feed = Feedjira::Feed.fetch_and_parse(url)
-  rescue
+  rescue StandardError => ex
+    err = "feed could not be fetched\n(Feedjira says: #{ex.message})"
+    logger.error "#{name}: #{err}"
+    errors[:url] << err
     nil
   end
 

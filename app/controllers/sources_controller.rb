@@ -1,5 +1,5 @@
 class SourcesController < ApplicationController
-  before_action :set_source, only: %i[show update destroy]
+  before_action :set_source, only: %i[show update destroy update_entries]
 
   # GET /sources
   def index
@@ -36,6 +36,16 @@ class SourcesController < ApplicationController
   # DELETE /sources/1
   def destroy
     @source.destroy
+  end
+
+  def update_entries
+    if @source.fetch
+      new_entries = @source.extract
+      @source.save_articles
+      render json: new_entries
+    else
+      render json: @source.errors
+    end
   end
 
   private

@@ -3,8 +3,11 @@ Rails.application.routes.draw do
     resources :articles, only: %i[show index] do
       resource :content, only: :show
     end
+
     resources :tags, only: %i[show index]
   end
+
+  get '/sources/:id/update_entries', to: 'sources#update_entries'
 
   resources :articles, only: %i[show index] do
     resource :content, only: :show

@@ -34,7 +34,7 @@ class Source < ApplicationRecord
     new_articles
   end
 
-  def write
+  def save_articles
     return false if new_articles.empty?
     articles << new_articles
     update(last_update: new_articles.first.date)

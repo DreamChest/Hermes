@@ -46,3 +46,4 @@ gem 'feedjira' # RSS fetching and parsing
 gem 'jwt' # Token-based authentication
 gem 'simple_command'
 gem 'validate_url' # URL validations
+gem 'yard' # Code documentation

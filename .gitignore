@@ -18,3 +18,7 @@
 !/tmp/.keep
 
 .byebug_history
+
+# YARD files and doc
+.yardoc
+doc/

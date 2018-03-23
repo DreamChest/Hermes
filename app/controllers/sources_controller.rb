@@ -1,3 +1,4 @@
+# Content controller class
 class SourcesController < ApplicationController
   before_action :set_source, only: %i[
     show update destroy update_entries clear reset

@@ -1,0 +1,3 @@
+--exclude app/channels
+--exclude app/jobs
+--exclude app/mailers

@@ -1,3 +1,4 @@
+# Content controller class
 class ContentsController < ApplicationController
   before_action :set_content, only: %i[show update destroy]
 

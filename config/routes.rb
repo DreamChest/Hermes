@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
 
   get '/sources/:id/update_entries', to: 'sources#update_entries'
+  get '/sources/:id/clear', to: 'sources#clear'
+  get '/sources/:id/reset', to: 'sources#reset'
 
   resources :articles, only: %i[show index] do
     resource :content, only: :show

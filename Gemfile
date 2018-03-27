@@ -44,6 +44,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'feedjira' # RSS fetching and parsing
 gem 'jwt' # Token-based authentication
+gem 'rmagick' # ImageMagick wrapper gem
 gem 'simple_command'
 gem 'validate_url' # URL validations
 gem 'yard' # Code documentation

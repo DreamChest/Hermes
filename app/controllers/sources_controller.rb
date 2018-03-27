@@ -21,6 +21,7 @@ class SourcesController < ApplicationController
     @source = Source.new(source_params)
 
     if @source.save
+      @source.fetch_favicon
       render json: @source, status: :created, location: @source
     else
       render json: @source.errors, status: :unprocessable_entity

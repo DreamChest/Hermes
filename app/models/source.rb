@@ -12,6 +12,8 @@ end
 # Source class, describes a RSS feed
 # @author Quentin Sonrel
 class Source < ApplicationRecord
+  require 'open-uri'
+
   has_many :articles, dependent: :destroy
   has_and_belongs_to_many :tags
 
@@ -50,6 +52,26 @@ class Source < ApplicationRecord
     return false if new_articles.empty?
     articles << new_articles
     update(last_update: new_articles.first.date)
+  end
+
+  # Fetch the favicon
+  # @return [Boolean] if the favicon was succesfully fetched
+  def fetch_favicon
+    # feed is defined by the feed validation
+    # since fetch_favicon is supposed to run at Source creation only
+    favicon_url ||= "#{feed.url}/favicon.ico"
+
+    open(Hermes::FAVICON_TEMP_PATH, 'wb') do |file|
+      file << open(favicon_url).read
+    end
+
+    Magick::Image.read(Hermes::FAVICON_TEMP_PATH).first
+                 .write("#{Hermes::FAVICON_BASE_DIR}/#{id}.png")
+
+    update(favicon_path: "#{Hermes::FAVICON_BASE_URL}/#{id}.png")
+  rescue StandardError => ex
+    logger.warn ex.message
+    false
   end
 
   # Clear (delete all) Articles from Source

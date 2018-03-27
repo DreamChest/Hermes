@@ -22,3 +22,6 @@
 # YARD files and doc
 .yardoc
 doc/
+
+# Dynamic assets
+public/assets/favicons

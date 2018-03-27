@@ -1,3 +1,5 @@
+# Class for the AuthenticateUser command
+# Authenticate a User to the API
 class AuthenticateUser
   prepend SimpleCommand
 
@@ -6,6 +8,8 @@ class AuthenticateUser
     @password = password
   end
 
+  # Generate token for the User
+  # @return [String] an authentication token for the User
   def call
     JsonWebToken.encode(user_id: user.id) if user
   end

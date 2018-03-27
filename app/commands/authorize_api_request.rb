@@ -1,3 +1,5 @@
+# Class for the AuthorizeApiRequest command
+# Authorize a request based on provided authorization token
 class AuthorizeApiRequest
   prepend SimpleCommand
 
@@ -5,6 +7,8 @@ class AuthorizeApiRequest
     @headers = headers
   end
 
+  # Authorize API request to User
+  # @return [User] the authenticated User
   def call
     user
   end
@@ -23,11 +27,8 @@ class AuthorizeApiRequest
   end
 
   def http_auth_header
-    if headers['Authorization'].present?
-      return headers['Authorization'].split(' ').last
-    else
-      errors.add(:token, 'Missing token')
-    end
+    return headers['Authorization'].split(' ').last if headers['Authorization'].present?
+    errors.add(:token, 'Missing token')
     nil
   end
 end

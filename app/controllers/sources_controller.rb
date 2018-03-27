@@ -48,7 +48,7 @@ class SourcesController < ApplicationController
       @source.save_articles
       render json: new_entries
     else
-      render json: @source.errors
+      render json: @source.errors, status: :unprocessable_entity
     end
   end
 
@@ -57,7 +57,7 @@ class SourcesController < ApplicationController
     if @source.clear
       render json: @source
     else
-      render json: @source.errors
+      render json: @source.errors, status: :unprocessable_entity
     end
   end
 
@@ -66,7 +66,7 @@ class SourcesController < ApplicationController
     if @source.reset
       render json: @source
     else
-      render json: @source.errors
+      render json: @source.errors, status: :unprocessable_entity
     end
   end
 
@@ -74,12 +74,12 @@ class SourcesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_source
-    @source = Source.where('name = ?', params[:id]).first
-    @source ||= Source.find(params[:id])
+    @source = Source.where('name = ?', params[:id]).first ||
+              Source.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def source_params
-    params.require(:source).permit(:name, :url, :favicon_path, :favicon_url)
+    params.require(:source).permit(:name, :url, :favicon_url)
   end
 end

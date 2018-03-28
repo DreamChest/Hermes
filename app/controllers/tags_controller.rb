@@ -39,6 +39,14 @@ class TagsController < ApplicationController
     @tag.destroy
   end
 
+  # GET /tags/clean
+  def clean
+    @tags = Tag.all
+
+    @tags.clean
+    render json: @tags
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

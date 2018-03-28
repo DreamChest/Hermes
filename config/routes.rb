@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resource :content, only: :show
   end
 
+  get '/tags/clean', to: 'tags#clean'
   resources :tags
 
   post 'authenticate', to: 'authentication#authenticate'

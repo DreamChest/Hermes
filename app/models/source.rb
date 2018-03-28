@@ -20,7 +20,7 @@ class Source < ApplicationRecord
   validates :name, :url, presence: true, uniqueness: true
   validates :url, url: true, feed: true
 
-  attr_accessor :feed, :new_articles
+  attr_accessor :feed, :new_articles, :tags_string
 
   # Fetch and parse entries from feed URL
   # @return [Boolean] if the feed was successfully fetched
@@ -57,8 +57,6 @@ class Source < ApplicationRecord
   # Fetch the favicon
   # @return [Boolean] if the favicon was succesfully fetched
   def fetch_favicon
-    # feed is defined by the feed validation
-    # since fetch_favicon is supposed to run at Source creation only
     favicon_url ||= "#{feed.url}/favicon.ico"
 
     open(Hermes::FAVICON_TEMP_PATH, 'wb') do |file|
@@ -72,6 +70,15 @@ class Source < ApplicationRecord
   rescue StandardError => ex
     logger.warn ex.message
     false
+  end
+
+  # Tag the source
+  # @param tags list of tags (space-separated string)
+  def tag(tags)
+    self.tags.clear
+    tags.each do |tag|
+      self.tags << (Tag.where('name = ?', tag).first || Tag.create(name: tag))
+    end
   end
 
   # Clear (delete all) Articles from Source

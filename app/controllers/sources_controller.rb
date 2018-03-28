@@ -19,6 +19,8 @@ class SourcesController < ApplicationController
   # POST /sources
   def create
     @source = Source.new(source_params)
+    tags = params[:source][:tags_string].split(' ')
+    @source.tag(tags) unless tags.blank?
 
     if @source.save
       @source.fetch_favicon
@@ -31,6 +33,7 @@ class SourcesController < ApplicationController
   # PATCH/PUT /sources/1
   def update
     if @source.update(source_params)
+      @source.fetch_favicon
       render json: @source
     else
       render json: @source.errors, status: :unprocessable_entity
@@ -81,6 +84,6 @@ class SourcesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def source_params
-    params.require(:source).permit(:name, :url, :favicon_url)
+    params.require(:source).permit(:name, :url, :favicon_url, :tags_string)
   end
 end

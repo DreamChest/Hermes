@@ -1,7 +1,7 @@
 # FeedValidator class, for validating RSS feed URLs
 # @author Quentin Sonrel
 class FeedValidator < ActiveModel::EachValidator
-  # Validate attributes (mandatory from FeedValidator)
+  # Validate attributes (mandatory from EachValidator)
   def validate_each(record, attribute, value)
     record.feed = Feedjira::Feed.fetch_and_parse(value)
   rescue StandardError
@@ -49,7 +49,7 @@ class Source < ApplicationRecord
   # Save Articles to DB
   # @return [Boolean] if the Articles were succesfully saved
   def save_articles
-    return false if new_articles.empty?
+    return false if new_articles.blank?
     articles << new_articles
     update(last_update: new_articles.first.date)
   end
@@ -74,6 +74,7 @@ class Source < ApplicationRecord
 
   # Tag the source
   # @param tags list of tags (space-separated string)
+  # @return [Tags[]] the used tags
   def tag(tags)
     self.tags.clear
     tags.each do |tag|

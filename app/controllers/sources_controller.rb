@@ -20,7 +20,7 @@ class SourcesController < ApplicationController
   def create
     @source = Source.new(source_params)
     tags = params[:source][:tags_string].split(' ')
-    @source.tag(tags) unless tags.blank?
+    @source.tag(tags) if tags.present?
 
     if @source.save
       @source.fetch_favicon
@@ -32,6 +32,9 @@ class SourcesController < ApplicationController
 
   # PATCH/PUT /sources/1
   def update
+    tags = params[:source][:tags_string].split(' ')
+    @source.tag(tags) if tags.present?
+
     if @source.update(source_params)
       @source.fetch_favicon
       render json: @source

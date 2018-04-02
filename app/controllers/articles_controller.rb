@@ -1,11 +1,10 @@
 # Articles controller class
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[show update destroy]
+  before_action :set_article, only: :show
+  before_action :set_articles, only: :index
 
   # GET /articles
   def index
-    @articles = Article.all
-
     render json: @articles
   end
 
@@ -18,11 +17,25 @@ class ArticlesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_article
-    @article = Article.find(params[:id])
+    @article = Article.find(articles_params[:id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_articles
+    @articles = if articles_params[:source_id].present?
+                  Source.dirty_find(articles_params[:source_id]).articles
+                else
+                  Article.all
+                end
   end
 
   # Only allow a trusted parameter "white list" through.
   def article_params
     params.require(:article).permit(:title, :date, :url, :favorite, :read)
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def articles_params
+    params.permit(:id, :source_id, :sources, :tags)
   end
 end

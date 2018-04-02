@@ -3,11 +3,10 @@ class SourcesController < ApplicationController
   before_action :set_source, only: %i[
     show update destroy update_entries clear reset
   ]
+  before_action :set_sources, only: :index
 
   # GET /sources
   def index
-    @sources = Source.all
-
     render json: @sources
   end
 
@@ -19,7 +18,8 @@ class SourcesController < ApplicationController
   # POST /sources
   def create
     @source = Source.new(source_params)
-    tags = params[:source][:tags_string].split(' ')
+
+    tags = source_params[:tags_string].split(' ')
     @source.tag(tags) if tags.present?
 
     if @source.save
@@ -32,7 +32,7 @@ class SourcesController < ApplicationController
 
   # PATCH/PUT /sources/1
   def update
-    tags = params[:source][:tags_string].split(' ')
+    tags = source_params[:tags_string].split(' ')
     @source.tag(tags) if tags.present?
 
     if @source.update(source_params)
@@ -81,12 +81,25 @@ class SourcesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_source
-    @source = Source.where('name = ?', params[:id]).first ||
-              Source.find(params[:id])
+    @source = Source.dirty_find(sources_params[:id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sources
+    @sources = if sources_params[:tag_id].present?
+                 Tag.dirty_find(sources_params[:tag_id]).sources
+               else
+                 Source.all
+               end
   end
 
   # Only allow a trusted parameter "white list" through.
   def source_params
     params.require(:source).permit(:name, :url, :favicon_url, :tags_string)
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def sources_params
+    params.permit(:id, :tag_id)
   end
 end

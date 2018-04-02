@@ -1,11 +1,10 @@
 # Content controller class
 class TagsController < ApplicationController
   before_action :set_tag, only: %i[show update destroy]
+  before_action :set_tags, only: %i[index]
 
   # GET /tags
   def index
-    @tags = Tag.all
-
     render json: @tags
   end
 
@@ -41,21 +40,32 @@ class TagsController < ApplicationController
 
   # GET /tags/clean
   def clean
-    @tags = Tag.all
-
-    @tags.clean
-    render json: @tags
+    Tag.clean
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_tag
-    @tag = Tag.where('name = ?', params[:id]).first || Tag.find(params[:id])
+    @tag = Tag.dirty_find(tags_params[:id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tags
+    @tags = if tags_params[:source_id].present?
+              Source.dirty_find(tags_params[:source_id]).tags
+            else
+              Tag.all
+            end
   end
 
   # Only allow a trusted parameter "white list" through.
   def tag_params
     params.require(:tag).permit(:name, :color)
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def tags_params
+    params.permit(:id, :source_id)
   end
 end

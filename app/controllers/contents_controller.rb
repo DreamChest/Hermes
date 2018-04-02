@@ -1,13 +1,6 @@
 # Content controller class
 class ContentsController < ApplicationController
-  before_action :set_content, only: %i[show update destroy]
-
-  # GET /contents
-  def index
-    @contents = Content.all
-
-    render json: @contents
-  end
+  before_action :set_content, only: :show
 
   # GET /contents/1
   def show
@@ -18,11 +11,11 @@ class ContentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_content
-    @content = Article.find(params[:article_id]).content
+    @content = Article.find(content_params[:article_id]).content
   end
 
   # Only allow a trusted parameter "white list" through.
   def content_params
-    params.require(:content).permit(:html)
+    params.permit(:article_id)
   end
 end

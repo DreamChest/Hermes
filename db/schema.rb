@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20180320133748) do
   create_table "sources", force: :cascade do |t|
     t.string "name"
     t.string "url"
-    t.string "favicon_path"
     t.string "favicon_url"
+    t.string "favicon_path"
     t.datetime "last_update", default: "1970-01-01 00:00:00"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20180320133748) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.string "color"
+    t.string "color", default: "#ffffff"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -9,5 +9,6 @@
 User.create(email: 'admin@foobar.com', password: 'admin', password_confirmation: 'admin')
 
 source1 = Source.create(name: 'Korben', url: 'https://korben.info/feed')
-tag1 = Tag.create(name: 'tech', color: '#ffffff')
-source1.tags << tag1
+source2 = Source.create(name: 'Slashdot', url: 'http://rss.slashdot.org/Slashdot/slashdotMain')
+source1.tag(%w[tech blog])
+source2.tag(['tech'])

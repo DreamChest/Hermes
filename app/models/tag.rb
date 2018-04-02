@@ -16,8 +16,6 @@ class Tag < ApplicationRecord
 
   # Remove unused Tags
   def self.clean
-    all.each do |t|
-      t.destroy if t.sources.blank?
-    end
+    all.each { |t| t.destroy if t.sources.blank? }
   end
 end

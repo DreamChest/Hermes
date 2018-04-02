@@ -37,13 +37,9 @@ class Source < ApplicationRecord
   # Extract Articles from feed entries
   # @return [Array] the new Articles extracted from feed
   def extract
-    self.new_articles = []
-
-    feed.entries.each do |e|
-      new_articles << parse(e) if e.published.utc > last_update
+    self.new_articles = feed.entries.map do |e|
+      parse(e) if e.published.utc > last_update
     end
-
-    new_articles
   end
 
   # Save Articles to DB
@@ -72,7 +68,7 @@ class Source < ApplicationRecord
     false
   end
 
-  # Tag the source
+  # Tag the source from a space separated string of Tags
   # @param tags list of tags (space-separated string)
   # @return [Tags[]] the used tags
   def tag(tags)

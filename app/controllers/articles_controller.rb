@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles
   def index
-    render json: @articles
+    render json: @articles.sort_by(&:date).reverse
   end
 
   # GET /articles/1
@@ -23,9 +23,21 @@ class ArticlesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_articles
     @articles = if articles_params[:source_id].present?
-                  Source.dirty_find(articles_params[:source_id]).articles
+                  Source.dirty_find(articles_params[:source_id]).articles.to_a
+                elsif articles_params[:sources].present?
+                  Source
+                    .where('name in (?)', articles_params[:sources].split(','))
+                    .map(&:articles)
+                    .flatten
+                elsif articles_params[:tags].present?
+                  Tag
+                    .where('name in (?)', articles_params[:tags].split(','))
+                    .map(&:sources)
+                    .flatten
+                    .map(&:articles)
+                    .flatten
                 else
-                  Article.all
+                  Article.all.to_a
                 end
   end
 

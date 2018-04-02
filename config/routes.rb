@@ -16,7 +16,13 @@ Rails.application.routes.draw do
   end
 
   get '/tags/clean', to: 'tags#clean'
-  resources :tags
+  resources :tags do
+    resources :sources, only: %i[show index] do
+      resources :articles, only: %i[show index] do
+        resource :content, only: :show
+      end
+    end
+  end
 
   post 'authenticate', to: 'authentication#authenticate'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

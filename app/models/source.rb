@@ -39,7 +39,7 @@ class Source < ApplicationRecord
   def extract
     self.new_articles = feed.entries.map do |e|
       parse(e) if e.published.utc > last_update
-    end
+    end.compact
   end
 
   # Save Articles to DB

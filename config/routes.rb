@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :tags, only: %i[show index]
   end
 
-  get '/sources/:id/update_entries', to: 'sources#update_entries'
+  get '/sources/:id/update_articles', to: 'sources#update_articles'
   get '/sources/:id/clear', to: 'sources#clear'
   get '/sources/:id/reset', to: 'sources#reset'
 

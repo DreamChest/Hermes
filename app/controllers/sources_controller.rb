@@ -1,7 +1,7 @@
 # Content controller class
 class SourcesController < ApplicationController
   before_action :set_source, only: %i[
-    show update destroy update_entries clear reset
+    show update destroy update_articles clear reset
   ]
   before_action :set_sources, only: :index
 
@@ -46,17 +46,17 @@ class SourcesController < ApplicationController
     @source.destroy
   end
 
-  # GET /sources/1/update_entries
-  def update_entries
+  # GET /sources/1/update_articles
+  def update_articles
     if @source.fetch
-      new_entries = @source.extract
+      new_articles = @source.extract
       @source.save_articles
-      render json: new_entries
+      render json: new_articles
     else
       render json: @source.errors, status: :unprocessable_entity
     end
   end
-
+  
   # GET /sources/1/clear
   def clear
     if @source.clear

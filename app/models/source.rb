@@ -103,6 +103,7 @@ class Source < ApplicationRecord
       a.title = entry.title
       a.date = entry.published.utc
       a.url = entry.url
+      a.content = Content.new(html: entry.content || entry.summary)
     end
   end
 end

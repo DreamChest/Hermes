@@ -6,7 +6,7 @@ module V1
 
     # GET /articles
     def index
-      render json: @articles.sort_by(&:date).reverse
+      render json: @articles
     end
 
     # GET /articles/1
@@ -30,8 +30,10 @@ module V1
                   elsif articles_params[:tags].present?
                     Article.filter_by_tags(articles_params[:tags].split(','))
                   else
-                    Article.all.to_a
+                    Article.all
                   end
+
+      @articles = @articles.order('date DESC')
     end
 
     # Only allow a trusted parameter "white list" through.

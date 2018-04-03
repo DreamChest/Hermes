@@ -54,7 +54,7 @@ module V1
     # Use callbacks to share common setup or constraints between actions.
     def set_tags
       @tags = if tags_params[:source_id].present?
-                Source.dirty_find(tags_params[:source_id]).tags
+                Tag.filter_by_source(tags_params[:source_id])
               else
                 Tag.all
               end

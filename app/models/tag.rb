@@ -14,6 +14,10 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, valid_name: true
 
+  def self.filter_by_source(source)
+    joins(:sources).where('sources.name = :id or sources.name = :id', id: source)
+  end
+
   # Remove unused Tags
   def self.clean
     all.each { |t| t.destroy if t.sources.blank? }

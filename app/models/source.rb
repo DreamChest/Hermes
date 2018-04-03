@@ -22,6 +22,10 @@ class Source < ApplicationRecord
 
   attr_accessor :feed, :new_articles, :tags_string
 
+  def self.filter_by_tag(tag)
+    joins(:tags).where('tags.id = :id or tags.name = :id', id: tag)
+  end
+
   # Fetch and parse entries from feed URL
   # @return [Boolean] if the feed was successfully fetched
   def fetch

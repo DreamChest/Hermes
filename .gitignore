@@ -25,3 +25,6 @@ doc/
 
 # Dynamic assets
 public/assets/favicons
+
+# Other
+resetdb.sh

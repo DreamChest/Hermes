@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/sources/update', to: 'sources#update_all'
   resources :sources do
     resources :articles, only: %i[show index] do
       resource :content, only: :show
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
     resources :tags, only: %i[show index]
   end
 
-  get '/sources/:id/update_articles', to: 'sources#update_articles'
+  get '/sources/:id/update', to: 'sources#update_articles'
   get '/sources/:id/clear', to: 'sources#clear'
   get '/sources/:id/reset', to: 'sources#reset'
 

@@ -3,7 +3,7 @@ class SourcesController < ApplicationController
   before_action :set_source, only: %i[
     show update destroy update_articles clear reset
   ]
-  before_action :set_sources, only: :index
+  before_action :set_sources, only: %i[index update_all]
 
   # GET /sources
   def index
@@ -56,7 +56,22 @@ class SourcesController < ApplicationController
       render json: @source.errors, status: :unprocessable_entity
     end
   end
-  
+
+  # GET /sources/update_all
+  def update_all
+    new_articles = []
+    errors = {}
+    @sources.each do |s|
+      if s.fetch
+        new_articles << s.extract
+        s.save_articles
+      else
+        errors[:"#{s.id}"] = s.errors
+      end
+    end
+    render json: { articles: new_articles.flatten, errors: errors }, status: errors.present? ? :accepted : :ok
+  end
+
   # GET /sources/1/clear
   def clear
     if @source.clear

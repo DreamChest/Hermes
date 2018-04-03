@@ -53,7 +53,7 @@ class SourcesController < ApplicationController
       @source.save_articles
       render json: new_articles
     else
-      render json: @source.errors, status: :unprocessable_entity
+      render json: @source.errors, status: :internal_server_error
     end
   end
 
@@ -69,7 +69,10 @@ class SourcesController < ApplicationController
         errors[:"#{s.id}"] = s.errors
       end
     end
-    render json: { articles: new_articles.flatten, errors: errors }, status: errors.present? ? :accepted : :ok
+    render json: {
+      articles: new_articles.flatten,
+      errors: errors
+    }, status: errors.present? ? :accepted : :ok
   end
 
   # GET /sources/1/clear
@@ -77,7 +80,7 @@ class SourcesController < ApplicationController
     if @source.clear
       render json: @source
     else
-      render json: @source.errors, status: :unprocessable_entity
+      render json: @source.errors, status: :internal_server_error
     end
   end
 
@@ -86,7 +89,7 @@ class SourcesController < ApplicationController
     if @source.reset
       render json: @source
     else
-      render json: @source.errors, status: :unprocessable_entity
+      render json: @source.errors, status: :internal_server_error
     end
   end
 

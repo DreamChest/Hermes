@@ -14,11 +14,15 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, valid_name: true
 
+  # Filter Tags by Source
+  # @param source Source to filter by
+  # @return [Tag::ActiveRecord_Relation] collection of Tags containing the Source
   def self.filter_by_source(source)
     joins(:sources).where('sources.name = :id or sources.name = :id', id: source)
   end
 
   # Remove unused Tags
+  # @return [Array] array of remaining Tags
   def self.clean
     all.each { |t| t.destroy if t.sources.blank? }
   end

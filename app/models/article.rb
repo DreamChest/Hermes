@@ -10,14 +10,14 @@ class Article < ApplicationRecord
 
   # Filter Articles by Sources
   # @param sources Sources to filter by (array of Source names (strings))
-  # @return [Array] array of articles filtered by Sources
+  # @return [Article::ActiveRecord_Relation] collection of articles filtered by Sources
   def self.filter_by_sources(sources)
     joins(:source).where('sources.name in (?)', sources)
   end
 
   # Filter Articles by Tags
   # @param tags Tags to filter by (array of Tag names (strings))
-  # @return [Array] array of Articles filtered by Tags
+  # @return [Article::ActiveRecord_Relation] collection of Articles filtered by Tags
   def self.filter_by_tags(tags)
     joins('
       inner join sources_tags on articles.source_id = sources_tags.source_id

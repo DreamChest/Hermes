@@ -22,6 +22,9 @@ class Source < ApplicationRecord
 
   attr_accessor :feed, :new_articles, :tags_string
 
+  # Filter Sources by tag
+  # @param tag Tag to filter by
+  # @return [Source::ActiveRecord_Relation] collection of Sources containing the Tag
   def self.filter_by_tag(tag)
     joins(:tags).where('tags.id = :id or tags.name = :id', id: tag)
   end
@@ -39,7 +42,7 @@ class Source < ApplicationRecord
   end
 
   # Extract Articles from feed entries
-  # @return [Array] the new Articles extracted from feed
+  # @return [Array] array of Articles extracted from Source feed
   def extract
     self.new_articles = feed.entries.map do |e|
       parse(e) if e.published.utc > last_update
@@ -74,7 +77,7 @@ class Source < ApplicationRecord
 
   # Tag the source from a space separated string of Tags
   # @param tags list of tags (space-separated string)
-  # @return [Tags[]] the used tags
+  # @return [Array] array of Tags attributed to Source
   def tag(tags)
     self.tags.clear
     tags.each do |tag|
@@ -97,7 +100,7 @@ class Source < ApplicationRecord
   private
 
   # Parse a feed entry to an Article
-  # @return [Article] the parsed article
+  # @return [Article] the parsed Article
   def parse(entry)
     Article.new do |a|
       a.title = entry.title

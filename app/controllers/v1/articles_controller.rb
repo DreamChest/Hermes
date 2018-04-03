@@ -34,6 +34,14 @@ module V1
                   end
 
       @articles = @articles.order('date DESC')
+
+      if articles_params[:since].present?
+        @articles = @articles.where('date >= ?', articles_params[:since])
+      end
+
+      if articles_params[:limit].present?
+        @articles = @articles.limit(articles_params[:limit])
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -43,7 +51,7 @@ module V1
 
     # Only allow a trusted parameter "white list" through.
     def articles_params
-      params.permit(:id, :source_id, :sources, :tags)
+      params.permit(:id, :source_id, :sources, :tags, :since, :limit)
     end
   end
 end

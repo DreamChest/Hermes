@@ -16,6 +16,18 @@ module V1
 
     private
 
+    def filtering_params
+      if articles_params[:source_id].present? || articles_params[:sources].present?
+        content = articles_params[:source_id]
+        content ||= articles_params[:sources].split(',')
+        { type: :sources, content: content }
+      elsif articles_params[:tags].present?
+        { type: :tags, content: articles_params[:tags].split(',') }
+      else
+        { type: :none, content: nil }
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(articles_params[:id])
@@ -23,25 +35,11 @@ module V1
 
     # Use callbacks to share common setup or constraints between actions.
     def set_articles
-      @articles = if articles_params[:source_id].present?
-                    Article.filter_by_source(articles_params[:source_id])
-                  elsif articles_params[:sources].present?
-                    Article.filter_by_source(articles_params[:sources].split(','))
-                  elsif articles_params[:tags].present?
-                    Article.filter_by_tags(articles_params[:tags].split(','))
-                  else
-                    Article.all
-                  end
-
-      @articles = @articles.order('date DESC')
-
-      if articles_params[:since].present?
-        @articles = @articles.where('date >= ?', articles_params[:since])
-      end
-
-      if articles_params[:limit].present?
-        @articles = @articles.limit(articles_params[:limit])
-      end
+      @articles = Article
+                  .filter(filtering_params[:type], filtering_params[:content])
+                  .order('date DESC')
+                  .where('date > ?', articles_params[:since] || Time.at(0))
+                  .limit(articles_params[:limit])
     end
 
     # Only allow a trusted parameter "white list" through.

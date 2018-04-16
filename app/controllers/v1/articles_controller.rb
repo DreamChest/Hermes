@@ -16,6 +16,7 @@ module V1
 
     private
 
+    # Set filtering parameters
     def filtering_params
       if articles_params[:source_id].present? || articles_params[:sources].present?
         content = articles_params[:source_id]
@@ -28,14 +29,19 @@ module V1
       end
     end
 
+    # Filter Articles by User (current)
+    def user_articles
+      @articles = Article.filter_by_user(current_user)
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(articles_params[:id])
+      @article = user_articles.find(articles_params[:id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_articles
-      @articles = Article
+      @articles = user_articles
                   .filter(filtering_params[:type], filtering_params[:content])
                   .order('date DESC')
                   .where('date > ?', articles_params[:since] || Time.at(0))

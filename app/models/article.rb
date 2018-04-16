@@ -8,7 +8,7 @@ class Article < ApplicationRecord
 
   validates :title, :date, :url, presence: true
 
-  # Filter Articles
+  # Filter Articles (wrapper for filter_by_source and filter_by_tags)
   # @param by type of filter (:sources, :tags or :none)
   # @param array collection to filter by (array of Sources or Tags or nothing)
   # @return [Article::ActiveRecord_Relation] filtered collection of Articles
@@ -19,8 +19,15 @@ class Article < ApplicationRecord
     when :tags
       filter_by_tags(array)
     else
-      Article.all
+      all
     end
+  end
+
+  # Filter Articles by Source User
+  # @param user User to filter by
+  # @return [Article::ActiveRecord_Relation] filtered collection of Articles
+  def self.filter_by_user(user)
+    joins(:source).where('sources.user_id = ?', user.id)
   end
 
   # Filter Articles by Sources

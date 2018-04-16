@@ -12,7 +12,10 @@ module V1
 
     # Use callbacks to share common setup or constraints between actions.
     def set_content
-      @content = Article.find(content_params[:article_id]).content
+      @content = Article
+                 .filter_by_user(current_user)
+                 .find(content_params[:article_id])
+                 .content
     end
 
     # Only allow a trusted parameter "white list" through.

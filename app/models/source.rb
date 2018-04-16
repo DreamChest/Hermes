@@ -16,8 +16,9 @@ class Source < ApplicationRecord
 
   has_many :articles, dependent: :destroy
   has_and_belongs_to_many :tags
+  belongs_to :user
 
-  validates :name, :url, presence: true, uniqueness: true
+  validates :name, :url, presence: true, uniqueness: { scope: :user_id }
   validates :url, url: true, feed: true
 
   attr_accessor :feed, :new_articles, :tags_string

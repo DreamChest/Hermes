@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20180320133748) do
   end
 
   create_table "sources", force: :cascade do |t|
+    t.integer "user_id"
     t.string "name"
     t.string "url"
     t.string "favicon_url"

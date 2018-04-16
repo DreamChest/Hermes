@@ -19,12 +19,13 @@ module V1
     # POST /sources
     def create
       @source = Source.new(source_params)
+      @source.user = current_user
 
       @source.tag(source_params[:tags_string].split(' ')) if source_params[:tags_string].present?
 
       if @source.save
         @source.fetch_favicon
-        render json: @source, status: :created, location: @source
+        render json: @source, status: :created
       else
         render json: @source.errors, status: :unprocessable_entity
       end
@@ -98,15 +99,15 @@ module V1
 
     # Use callbacks to share common setup or constraints between actions.
     def set_source
-      @source = Source.dirty_find(sources_params[:id])
+      @source = current_user.sources.dirty_find(sources_params[:id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_sources
       @sources = if sources_params[:tag_id].present?
-                   Source.filter_by_tag(sources_params[:tag_id])
+                   current_user.sources.filter_by_tag(sources_params[:tag_id])
                  else
-                   Source.all
+                   current_user.sources.all
                  end
     end
 

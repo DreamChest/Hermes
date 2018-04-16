@@ -11,8 +11,9 @@ end
 # @author Quentin Sonrel
 class Tag < ApplicationRecord
   has_and_belongs_to_many :sources
+  belongs_to :user
 
-  validates :name, presence: true, uniqueness: true, valid_name: true
+  validates :name, presence: true, uniqueness: { scope: :user_id }, valid_name: true
 
   # Filter Tags by Source
   # @param source Source to filter by

@@ -82,7 +82,7 @@ class Source < ApplicationRecord
   def tag(tags)
     self.tags.clear
     tags.each do |tag|
-      self.tags << (Tag.where('name = ?', tag).first || Tag.create(name: tag))
+      self.tags << (user.tags.where('name = ?', tag).first || user.tags.create(name: tag))
     end
   end
 

@@ -17,6 +17,7 @@ module V1
     # POST /tags
     def create
       @tag = Tag.new(tag_params)
+      @tag.user = current_user
 
       if @tag.save
         render json: @tag, status: :created, location: @tag
@@ -41,22 +42,22 @@ module V1
 
     # GET /tags/clean
     def clean
-      Tag.clean
+      current_user.tags.clean
     end
 
     private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
-      @tag = Tag.dirty_find(tags_params[:id])
+      @tag = current_user.tags.dirty_find(tags_params[:id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_tags
       @tags = if tags_params[:source_id].present?
-                Tag.filter_by_source(tags_params[:source_id])
+                current_user.tags.filter_by_source(tags_params[:source_id])
               else
-                Tag.all
+                current_user.tags.all
               end
     end
 

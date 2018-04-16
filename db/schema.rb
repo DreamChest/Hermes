@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20180320133748) do
   end
 
   create_table "tags", force: :cascade do |t|
+    t.integer "user_id"
     t.string "name"
     t.string "color", default: "#ffffff"
     t.datetime "created_at", null: false

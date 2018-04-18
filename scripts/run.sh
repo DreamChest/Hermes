@@ -44,7 +44,7 @@ stop() {
 
 print_usage() {
   echo "${0##/*} --run:\t\tRun Hermes"
-  echo "${0##/*} --stop:\t\tStop Hermes"
+  echo "${0##/*} --stop:\tStop Hermes"
   echo "${0##/*} --restart:\tRestart Hermes"
 }
 

@@ -10,6 +10,7 @@ fi
 SECRET_KEY_BASE=$(cat .secret_key_base)
 export SECRET_KEY_BASE
 
+bundle install
 rake db:migrate
 
 exit 0

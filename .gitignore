@@ -27,5 +27,5 @@ doc/
 public/assets/favicons
 
 # Other
-resetdb.sh
 erd.pdf
+.secret_key_base

@@ -44,7 +44,7 @@ Full API documentation can be found [here][4].
 
 To contribute to Hermes, you can fork the project and work on your own features.
 
-Development requirements are the same as described in the [requirement section](#Requirements).
+Development requirements are the same as described in the [requirement section](#requirements).
 
 Installation instructions are Rails classic procedure :
 

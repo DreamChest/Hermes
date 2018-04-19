@@ -28,7 +28,7 @@ More installation options coming soon.
 
 ## Configuration
 
-For now, the only needed configuration for the API is the creation a user, you can create one by running `rake user:create\[email,password\]`, replacing email by an email and password by the wanted password.
+For now, the only needed configuration for the API is the creation of a user, you can create one by running `rake user:create\[email,password\]`, replacing email by an email and password by the wanted password.
 
 ## Usage
 

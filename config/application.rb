@@ -33,6 +33,13 @@ module Hermes
     config.after_initialize do
       FileUtils.mkdir_p(Hermes::FAVICON_BASE_DIR) unless File.exist?(Hermes::FAVICON_BASE_DIR)
     end
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: %i[get post options]
+      end
+    end
   end
 
   # Constants

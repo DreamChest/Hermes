@@ -11,7 +11,7 @@ class AuthenticateUser
   # Generate token for the User
   # @return [String] an authentication token for the User
   def call
-    JsonWebToken.encode(user_id: user.id) if user
+    JsonWebToken.encode(user_id: user.id, user_email: user.email) if user
   end
 
   private

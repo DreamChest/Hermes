@@ -1,28 +1,53 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# Valid
-valid:
-  user_id: 1
-  name: valid
+# Many valid sources
+<% 1.upto(5) do |i| %>
+source_<%= i %>:
+  id: <%= i %>
+  user_id: <%= i %>
+  name: source_<%= i %>
   url: https://korben.info/rss
+<% end %>
 
-# Invalid, missing user
 missing_user:
   name: missing_user
   url: https://korben.info/rss
 
-# Invalid, missing name
 missing_name:
-  user_id: 2
+  user_id: 10
   url: https://korben.info/rss
 
-# Invalid, missing URL
 missing_url:
-  user_id: 3
+  user_id: 11
   name: missing_url
 
-# Valid
-duplicate_step1:
-  user_id: 4
+duplicate_base:
+  user_id: 12
   name: duplicate
   url: https://korben.info/rss
+
+duplicate_name:
+  user_id: 12
+  name: duplicate
+  url: http://rss.slashdot.org/Slashdot/slashdotMain
+
+duplicate_url:
+  user_id: 12
+  name: notduplicate
+  url: https://korben.info/rss
+
+url_not_url:
+  user_id: 13
+  name: url_not_url
+  url: foo
+
+url_not_feed:
+  user_id: 14
+  name: url_not_feed
+  url: https://google.com
+
+tag_filtering:
+  user_id: 15
+  name: tag_filtering
+  url: https://korben.info/rss
+  tags: tag_1 tag_2

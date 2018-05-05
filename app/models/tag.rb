@@ -19,7 +19,7 @@ class Tag < ApplicationRecord
   # @param source Source to filter by
   # @return [Tag::ActiveRecord_Relation] collection of Tags containing the Source
   def self.filter_by_source(source)
-    joins(:sources).where('sources.name = :id or sources.name = :id', id: source)
+    joins(:sources).where('sources.id = :id or sources.name = :id', id: source)
   end
 
   # Remove unused Tags

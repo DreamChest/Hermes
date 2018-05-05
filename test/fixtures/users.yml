@@ -1,24 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# Valid
-valid:
-  id: 1
-  email: user@test.com
+# Many valid users
+<% 1.upto(100) do |i| %>
+user_<%= i %>:
+  id: <%= i %>
+  email: user_<%= i %>@foo.com
   password_digest: foo
+<% end %>
 
-# Invalid, missing email
 missing_email:
   password_digest: foo
 
-# Invalid, invalid email
 invalid_email:
   email: foo
   password_digest: foo
-
-# Generate 100 valid users
-<% 2.upto(100) do |i| %>
-user<%= i %>:
-  id: <%= i %>
-  email: user<%= i %>@test.com
-  password_digest: foo
-<% end %>

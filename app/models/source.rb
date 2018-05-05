@@ -55,7 +55,7 @@ class Source < ApplicationRecord
   def save_articles
     return false if new_articles.blank?
     articles << new_articles
-    update(last_update: new_articles.first.date)
+    update(last_update: articles.first.date)
   end
 
   # Fetch the favicon
@@ -82,7 +82,7 @@ class Source < ApplicationRecord
   def tag(tags)
     self.tags.clear
     tags.each do |tag|
-      self.tags << (user.tags.where('name = ?', tag).first || user.tags.create(name: tag))
+      self.tags << (user.tags.find(tag.id) || user.tags.create(name: tag))
     end
   end
 

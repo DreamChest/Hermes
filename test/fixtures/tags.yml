@@ -1,9 +1,24 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  color: MyString
+# Many valid tags
+<% 1.upto(5) do |i| %>
+tag_<%= i %>:
+  id: <%= i %>
+  user_id: 1
+  name: tag_<%= i %>
+<% end %>
 
-two:
-  name: MyString
-  color: MyString
+missing_name:
+  user_id: 10
+
+duplicate_base:
+  user_id: 11
+  name: duplicate
+
+duplicate_name:
+  user_id: 11
+  name: duplicate
+
+invalid_name:
+  user_id: 12
+  name: clean

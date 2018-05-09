@@ -1,5 +1,5 @@
-# FeedValidator class, for validating RSS feed URLs
-# @author Quentin Sonrel
+# # FeedValidator class, for validating RSS feed URLs
+# # @author Quentin Sonrel
 class FeedValidator < ActiveModel::EachValidator
   # Validate attributes (mandatory from EachValidator)
   def validate_each(record, attribute, value)
@@ -24,7 +24,8 @@ class Source < ApplicationRecord
   attr_accessor :feed, :new_articles # For feed parsing
   attr_accessor :tags_string # For tagging from controller
 
-  after_save :tag, :fetch_favicon
+  after_save :tag, unless: proc { |source| source.tags_string.nil? }
+  after_save :fetch_favicon
   before_destroy :remove_favicon
 
   scope :by_tag, (lambda do |tag|
@@ -86,11 +87,11 @@ class Source < ApplicationRecord
 
   # Tag the source from a space separated string of Tags
   # @return [Array] array of Tags attributed to Source
-  def tag
-    tags.clear
-    tags_string.each do |tag|
+  def tag(tags = tags_string)
+    self.tags.clear
+    tags.each do |tag|
       t = user.tags.where('name = ?', tag).first || user.tags.create(name: tag)
-      tags << t
+      self.tags << t
     end
   end
 

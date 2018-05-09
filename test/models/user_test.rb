@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   test 'validations valid' do
-    1.upto(100) { |i| assert(users("user_#{i}").valid?) }
+    1.upto(50) { |i| assert(users("user_#{i}").valid?) }
   end
 
   test 'validations attribute presence' do

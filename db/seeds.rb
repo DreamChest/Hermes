@@ -14,5 +14,5 @@ s2 = u1.sources.create(name: 'Slashdot', url: 'http://rss.slashdot.org/Slashdot/
 s3 = u2.sources.create(name: 'Atom Packages', url: 'https://atom.io/packages.atom')
 
 s1.tag(%w[tech blog])
-# s2.tag(['tech'])
-# s3.tag(['tech'])
+s2.tag(['tech'])
+s3.tag(['tech'])

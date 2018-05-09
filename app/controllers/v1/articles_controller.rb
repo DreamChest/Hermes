@@ -16,35 +16,34 @@ module V1
 
     private
 
-    # Set filtering parameters
-    def filtering_params
-      if articles_params[:source_id].present? || articles_params[:sources].present?
-        content = articles_params[:source_id]
-        content ||= articles_params[:sources].split(',')
-        { type: :sources, content: content }
-      elsif articles_params[:tags].present?
-        { type: :tags, content: articles_params[:tags].split(',') }
-      else
-        { type: :none, content: nil }
-      end
+    # Criterias for sources filtering
+    def sources_crit
+      articles_params[:source_id] || articles_params[:sources]
     end
 
-    # Filter Articles by User (current)
-    def user_articles
-      @articles = Article.filter_by_user(current_user)
+    # Criterias for tags filtering
+    def tags_crit
+      articles_params[:tags]
+    end
+
+    # Filtered artiles (by source or tags)
+    def filtered_articles
+      return current_user.articles.by_sources(sources_crit) if sources_crit
+      return current_user.articles.by_tags(tags_crit) if tags_crit
+      current_user.articles
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = user_articles.find(articles_params[:id])
+      @article = current_user.articles.find(articles_params[:id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_articles
-      @articles = user_articles
-                  .filter(filtering_params[:type], filtering_params[:content])
+      @articles = filtered_articles
                   .order('date DESC')
-                  .where('date > ?', articles_params[:since] || Time.at(0))
+                  .since(articles_params[:since])
+                  .until(articles_params[:until])
                   .limit(articles_params[:limit])
     end
 
@@ -55,7 +54,7 @@ module V1
 
     # Only allow a trusted parameter "white list" through.
     def articles_params
-      params.permit(:id, :source_id, :sources, :tags, :since, :limit)
+      params.permit(:id, :source_id, :sources, :tags, :since, :until, :limit)
     end
   end
 end

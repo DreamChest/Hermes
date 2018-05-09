@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   has_many :sources
   has_many :tags
+  has_many :articles, through: :sources
 
   validates :email, presence: true, email: true
 end

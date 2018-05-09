@@ -21,10 +21,7 @@ module V1
       @source = Source.new(source_params)
       @source.user = current_user
 
-      @source.tag(source_params[:tags_string].split(' ')) if source_params[:tags_string].present?
-
       if @source.save
-        @source.fetch_favicon
         render json: @source, status: :created
       else
         render json: @source.errors, status: :unprocessable_entity
@@ -33,10 +30,7 @@ module V1
 
     # PATCH/PUT /sources/1
     def update
-      @source.tag(source_params[:tags_string].split(' ')) if source_params[:tags_string].present?
-
       if @source.update(source_params)
-        @source.fetch_favicon
         render json: @source
       else
         render json: @source.errors, status: :unprocessable_entity

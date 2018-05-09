@@ -14,21 +14,22 @@ end
 class Source < ApplicationRecord
   require 'open-uri'
 
+  belongs_to :user
   has_many :articles, dependent: :destroy
   has_and_belongs_to_many :tags
-  belongs_to :user
 
   validates :name, :url, presence: true, uniqueness: { scope: :user_id }
   validates :url, url: true, feed: true
 
-  attr_accessor :feed, :new_articles, :tags_string
+  attr_accessor :feed, :new_articles # For feed parsing
+  attr_accessor :tags_string # For tagging from controller
 
-  # Filter Sources by tag
-  # @param tag Tag to filter by
-  # @return [Source::ActiveRecord_Relation] collection of Sources containing the Tag
-  def self.filter_by_tag(tag)
+  after_save :tag, :fetch_favicon
+  before_destroy :remove_favicon
+
+  scope :by_tag, (lambda do |tag|
     joins(:tags).where('tags.id = :id or tags.name = :id', id: tag)
-  end
+  end)
 
   # Fetch and parse entries from feed URL
   # @return [Boolean] if the feed was successfully fetched
@@ -76,13 +77,20 @@ class Source < ApplicationRecord
     false
   end
 
+  # Remove the favicon (used upon destruction)
+  # @return [Boolean] if the favicon file was removed
+  def remove_favicon
+    path = "#{Hermes::FAVICON_BASE_DIR}/#{id}.png"
+    FileUtils.rm(path) if File.exist?(path)
+  end
+
   # Tag the source from a space separated string of Tags
-  # @param tags list of tags (space-separated string)
   # @return [Array] array of Tags attributed to Source
-  def tag(tags)
-    self.tags.clear
-    tags.each do |tag|
-      self.tags << (user.tags.find(tag.id) || user.tags.create(name: tag))
+  def tag
+    tags.clear
+    tags_string.each do |tag|
+      t = user.tags.where('name = ?', tag).first || user.tags.create(name: tag)
+      tags << t
     end
   end
 

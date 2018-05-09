@@ -1,15 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  date: 
-  url: MyString
-  favorite: false
+# Many valid articles
+<% 1.upto(50) do |i| %>
+article_<%= i %>:
+  id: <%= i %>
+  source_id: 1
+  title: article_<%= i %>
+  date: <%= Time.now %>
+  url: foo
   read: false
-
-two:
-  title: MyString
-  date: 
-  url: MyString
   favorite: false
-  read: false
+<% end %>

@@ -10,17 +10,15 @@ end
 # Tag class, describes a tag (categorization for Sources)
 # @author Quentin Sonrel
 class Tag < ApplicationRecord
-  has_and_belongs_to_many :sources
   belongs_to :user
+  has_and_belongs_to_many :sources
+  has_many :articles, through: :sources
 
   validates :name, presence: true, uniqueness: { scope: :user_id }, valid_name: true
 
-  # Filter Tags by Source
-  # @param source Source to filter by
-  # @return [Tag::ActiveRecord_Relation] collection of Tags containing the Source
-  def self.filter_by_source(source)
+  scope :by_source, (lambda do |source|
     joins(:sources).where('sources.id = :id or sources.name = :id', id: source)
-  end
+  end)
 
   # Remove unused Tags
   # @return [Array] array of remaining Tags

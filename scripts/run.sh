@@ -38,7 +38,6 @@ stop() {
     echo "Hermes stopped"
   else
     echo "No instances of Hermes were found"
-    exit 1
   fi
 }
 

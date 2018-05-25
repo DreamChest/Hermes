@@ -4,7 +4,7 @@ module V1
     before_action :set_source, only: %i[
       show update destroy update_articles clear reset
     ]
-    before_action :set_sources, only: %i[index update_all]
+    before_action :set_sources, only: %i[index]
 
     # GET /sources
     def index
@@ -42,33 +42,13 @@ module V1
       @source.destroy
     end
 
-    # GET /sources/1/update_articles
+    # GET /sources/1/update
     def update_articles
-      if @source.fetch
-        new_articles = @source.extract
-        @source.save_articles
-        render json: new_articles
+      if @source.update_articles
+        render json: @source.new_articles
       else
         render json: @source.errors, status: :internal_server_error
       end
-    end
-
-    # GET /sources/update_all
-    def update_all
-      new_articles = []
-      errors = {}
-      @sources.each do |s|
-        if s.fetch
-          new_articles << s.extract
-          s.save_articles
-        else
-          errors[:"#{s.id}"] = s.errors
-        end
-      end
-      render json: {
-        articles: new_articles.flatten,
-        errors: errors
-      }, status: errors.present? ? :accepted : :ok
     end
 
     # GET /sources/1/clear
@@ -99,7 +79,7 @@ module V1
     # Use callbacks to share common setup or constraints between actions.
     def set_sources
       @sources = if sources_params[:tag_id].present?
-                   current_user.sources.filter_by_tag(sources_params[:tag_id])
+                   current_user.sources.by_tag(sources_params[:tag_id])
                  else
                    current_user.sources.all
                  end

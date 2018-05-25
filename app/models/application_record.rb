@@ -3,7 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
   # Find record on first attribute/value match
-  # @param value value one the attributes should have
+  # @param value value one of the attributes should have
   # @param attr array of attributes names (strings)
   # @return [ActiveRecord] corresponding record
   def self.dirty_find(value, attrs = new.attributes.keys)

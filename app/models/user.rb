@@ -1,19 +1,19 @@
-# EmailValidator class, for validating User email
-# @author Quentin Sonrel
-class EmailValidator < ActiveModel::EachValidator
-  # Validate attributes (mandatory from EachValidator)
-  def validate_each(record, attribute, value)
-    record.errors[attribute] << (options[:message] || 'is not an email') unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  end
-end
-
 # User class, describes an authentifiable user for the API
 # @author Quentin Sonrel
 class User < ApplicationRecord
   has_secure_password
 
   has_many :sources
-  has_many :tags
+  has_many :tags do
+    # Fetch or a create Tags from a string
+    # @param str space-separated list of Tags
+    # @return the matching collection of Tags
+    def from_string(str)
+      str.split.map do |name|
+        where(name: name).first_or_create(name: name)
+      end
+    end
+  end
   has_many :articles, through: :sources
 
   validates :email, presence: true, email: true

@@ -1,4 +1,4 @@
-# EmailValidator class, for validating User email
+# EmailValidator class, for validating user email
 # @author Quentin Sonrel
 class EmailValidator < ActiveModel::EachValidator
   # Validate attributes (mandatory from EachValidator)

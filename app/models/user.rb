@@ -5,10 +5,10 @@ class User < ApplicationRecord
 
   has_many :sources
   has_many :tags do
-    # Fetch or a create Tags from a string
+    # Fetch or a create tags from a string
     # @param str space-separated list of Tags
     # @return the matching collection of Tags
-    def from_string(str)
+    def parse_str(str)
       str.split.map do |name|
         where(name: name).first_or_create(name: name)
       end

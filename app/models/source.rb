@@ -79,8 +79,8 @@ class Source < ApplicationRecord
   def fetch_favicon
     self.favicon_url ||= "#{feed.url}/favicon.ico"
 
-    open(Hermes::FAVICON_TEMP_PATH, 'wb') do |file|
-      file << open(favicon_url).read
+    File.open(Hermes::FAVICON_TEMP_PATH, 'wb') do |file|
+      file << URI.parse(favicon_url).open.read
     end
 
     Magick::Image.read(Hermes::FAVICON_TEMP_PATH).first

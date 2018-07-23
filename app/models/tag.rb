@@ -9,7 +9,7 @@ class Tag < ApplicationRecord
   has_and_belongs_to_many :sources
   has_many :articles, through: :sources
 
-  validates :name, presence: true, uniqueness: { scope: :user_id }, valid_name: true
+  validates :name, presence: true, uniqueness: { scope: :user_id }
 
   scope :from_source, (lambda do |source|
     joins(:sources).where('sources.id = :id or sources.name = :id', id: source)

@@ -44,6 +44,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'feedjira' # RSS fetching and parsing
+gem 'friendly_id' # Slugging lib
 gem 'jwt' # Token-based authentication
 gem 'rmagick' # ImageMagick wrapper gem
 gem 'simple_command' # To make... simple commands.

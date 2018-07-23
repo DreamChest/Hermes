@@ -74,7 +74,7 @@ module V1
 
     # Set requested unique source
     def set_source
-      @source = current_user.sources.dirty_find(sources_params[:id])
+      @source = current_user.sources.friendly.find(sources_params[:id])
     end
 
     # Set requested sources collection

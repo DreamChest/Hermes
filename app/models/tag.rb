@@ -1,6 +1,10 @@
 # Tag class, describes a tag (categorization for Sources)
 # @author Quentin Sonrel
 class Tag < ApplicationRecord
+  extend FriendlyId
+
+  friendly_id :name
+
   belongs_to :user
   has_and_belongs_to_many :sources
   has_many :articles, through: :sources

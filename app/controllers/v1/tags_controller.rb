@@ -50,7 +50,7 @@ module V1
 
     # Set requested unique tag
     def set_tag
-      @tag = current_user.tags.dirty_find(tags_params[:id])
+      @tag = current_user.tags.friendly.find(tags_params[:id])
     end
 
     # Set requested tags collection

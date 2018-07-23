@@ -2,6 +2,9 @@
 # @author Quentin Sonrel
 class Source < ApplicationRecord
   require 'open-uri'
+  extend FriendlyId
+
+  friendly_id :name
 
   belongs_to :user
   has_many :articles, dependent: :destroy

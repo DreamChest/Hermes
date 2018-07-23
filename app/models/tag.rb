@@ -7,12 +7,12 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: :user_id }, valid_name: true
 
-  scope :by_source, (lambda do |source|
+  scope :from_source, (lambda do |source|
     joins(:sources).where('sources.id = :id or sources.name = :id', id: source)
   end)
 
-  # Remove unused Tags
-  # @return [Array] array of remaining Tags
+  # Remove unused tags
+  # @return [Array] array of remaining tags
   def self.clean
     all.each { |t| t.destroy if t.sources.blank? }
   end

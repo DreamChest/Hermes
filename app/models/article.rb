@@ -10,11 +10,11 @@ class Article < ApplicationRecord
   scope :since, ->(date) { where('date >= ?', date) if date }
   scope :until, ->(date) { where('date <= ?', date) if date }
 
-  scope :by_sources, (lambda do |sources|
+  scope :from_sources, (lambda do |sources|
     joins(:source).where('sources.name in (?)', sources)
   end)
 
-  scope :by_tags, (lambda do |tags|
+  scope :with_tags, (lambda do |tags|
     joins('
       inner join sources_tags on articles.source_id = sources_tags.source_id
       inner join tags on sources_tags.tag_id = tags.id

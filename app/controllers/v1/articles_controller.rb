@@ -28,8 +28,8 @@ module V1
 
     # Filtered artiles (by source or tags)
     def filtered_articles
-      return current_user.articles.by_sources(sources_crit) if sources_crit
-      return current_user.articles.by_tags(tags_crit) if tags_crit
+      return current_user.articles.from_sources(sources_crit) if sources_crit
+      return current_user.articles.with_tags(tags_crit) if tags_crit
       current_user.articles
     end
 

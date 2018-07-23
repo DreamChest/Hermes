@@ -1,3 +1,4 @@
+# API version 1
 module V1
   # Content controller class
   class TagsController < ApplicationController
@@ -47,12 +48,12 @@ module V1
 
     private
 
-    # Use callbacks to share common setup or constraints between actions.
+    # Set requested unique tag
     def set_tag
       @tag = current_user.tags.dirty_find(tags_params[:id])
     end
 
-    # Use callbacks to share common setup or constraints between actions.
+    # Set requested tags collection
     def set_tags
       @tags = if tags_params[:source_id].present?
                 current_user.tags.from_source(tags_params[:source_id])
@@ -61,12 +62,12 @@ module V1
               end
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # White list for unique tag requests
     def tag_params
       params.require(:tag).permit(:name, :color)
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # White list for tags collection requests
     def tags_params
       params.permit(:id, :source_id)
     end

@@ -1,3 +1,4 @@
+# API version 1
 module V1
   # Content controller class
   class SourcesController < ApplicationController
@@ -71,12 +72,12 @@ module V1
 
     private
 
-    # Use callbacks to share common setup or constraints between actions.
+    # Set requested unique source
     def set_source
       @source = current_user.sources.dirty_find(sources_params[:id])
     end
 
-    # Use callbacks to share common setup or constraints between actions.
+    # Set requested sources collection
     def set_sources
       @sources = if sources_params[:tag_id].present?
                    current_user.sources.with_tag(sources_params[:tag_id])
@@ -85,12 +86,12 @@ module V1
                  end
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # White list for unique source requests
     def source_params
       params.require(:source).permit(:name, :url, :favicon_url, :tags_string)
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # White list for sources collection requests
     def sources_params
       params.permit(:id, :tag_id)
     end

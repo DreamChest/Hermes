@@ -1,3 +1,4 @@
+# API version 1
 module V1
   # Content controller class
   class ContentsController < ApplicationController
@@ -10,7 +11,7 @@ module V1
 
     private
 
-    # Use callbacks to share common setup or constraints between actions.
+    # Set requested content
     def set_content
       @content = current_user
                  .articles
@@ -18,7 +19,7 @@ module V1
                  .content
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # White list for content request
     def content_params
       params.permit(:article_id)
     end

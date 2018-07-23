@@ -1,3 +1,4 @@
+# API version 1
 module V1
   # Authentication controller class (for API)
   class AuthenticationController < ApplicationController

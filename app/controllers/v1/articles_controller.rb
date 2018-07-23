@@ -1,3 +1,4 @@
+# API version 1
 module V1
   # Articles controller class
   class ArticlesController < ApplicationController
@@ -26,19 +27,19 @@ module V1
       articles_params[:tags]
     end
 
-    # Filtered artiles (by source or tags)
+    # Filtered artiles (by source or tags, if any)
     def filtered_articles
       return current_user.articles.from_sources(sources_crit) if sources_crit
       return current_user.articles.with_tags(tags_crit) if tags_crit
       current_user.articles
     end
 
-    # Use callbacks to share common setup or constraints between actions.
+    # Set requested unique article
     def set_article
       @article = current_user.articles.find(articles_params[:id])
     end
 
-    # Use callbacks to share common setup or constraints between actions.
+    # Set requested articles collection
     def set_articles
       @articles = filtered_articles
                   .order('date DESC')
@@ -47,12 +48,12 @@ module V1
                   .limit(articles_params[:limit])
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # White list for unique article requests
     def article_params
       params.require(:article).permit(:title, :date, :url, :favorite, :read)
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # White list for articles collection requests
     def articles_params
       params.permit(:id, :source_id, :sources, :tags, :since, :until, :limit)
     end

@@ -1,5 +1,4 @@
-# Class for the AuthenticateUser command
-# Authenticate a User to the API
+# Class for the AuthenticateUser command, authenticates a user to the API
 class AuthenticateUser
   prepend SimpleCommand
 

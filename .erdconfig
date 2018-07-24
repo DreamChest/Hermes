@@ -1,0 +1,5 @@
+sort: false
+filename: doc/class_diagram
+notation: bachman
+disconnected: false
+title: "Hermes data model"

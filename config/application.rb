@@ -30,10 +30,12 @@ module Hermes
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # Create favicon dir if needed
     config.after_initialize do
       FileUtils.mkdir_p(Hermes::FAVICON_BASE_DIR) unless File.exist?(Hermes::FAVICON_BASE_DIR)
     end
 
+    # Cors support
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
@@ -42,9 +44,7 @@ module Hermes
     end
   end
 
-  # Constants
-
-  ## Favicons
+  ## Favicons constants
   FAVICON_TEMP_PATH = Rails.root.join('tmp/favicon.ico').freeze
   FAVICON_BASE_URL = '/assets/favicons'.freeze
   FAVICON_BASE_DIR = Rails.root.join("public/#{FAVICON_BASE_URL}").freeze

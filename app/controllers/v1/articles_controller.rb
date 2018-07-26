@@ -12,6 +12,7 @@ module V1
 
     # GET /articles/1
     def show
+      return render json: @article.to_json(include: :content) if articles_params[:content]
       render json: @article
     end
 
@@ -55,7 +56,16 @@ module V1
 
     # White list for articles collection requests
     def articles_params
-      params.permit(:id, :source_id, :sources, :tags, :since, :until, :limit)
+      params.permit(
+        :id,
+        :source_id,
+        :sources,
+        :tags,
+        :since,
+        :until,
+        :limit,
+        :content
+      )
     end
   end
 end

@@ -22,20 +22,14 @@ module V1
       @source = Source.new(source_params)
       @source.user = current_user
 
-      if @source.save
-        render json: @source, status: :created
-      else
-        render json: @source.errors, status: :unprocessable_entity
-      end
+      return render json: @source, status: :created if @source.save
+      render json: @source.errors, status: :unprocessable_entity
     end
 
     # PATCH/PUT /sources/1
     def update
-      if @source.update(source_params)
-        render json: @source
-      else
-        render json: @source.errors, status: :unprocessable_entity
-      end
+      return render json: @source if @source.update(source_params)
+      render json: @source.errors, status: :unprocessable_entity
     end
 
     # DELETE /sources/1
@@ -45,29 +39,20 @@ module V1
 
     # GET /sources/1/update
     def update_articles
-      if @source.update_articles
-        render json: @source.new_articles
-      else
-        render json: @source.errors, status: :internal_server_error
-      end
+      return render json: @source.new_articles if @source.update_articles
+      render json: @source.errors, status: :internal_server_error
     end
 
     # GET /sources/1/clear
     def clear
-      if @source.clear
-        render json: @source
-      else
-        render json: @source.errors, status: :internal_server_error
-      end
+      return render json: @source if @source.clear
+      render json: @source.errors, status: :internal_server_error
     end
 
     # GET /sources/1/reset
     def reset
-      if @source.reset
-        render json: @source
-      else
-        render json: @source.errors, status: :internal_server_error
-      end
+      return render json: @source if @source.reset
+      render json: @source.errors, status: :internal_server_error
     end
 
     private

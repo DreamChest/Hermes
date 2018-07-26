@@ -1,30 +1,31 @@
 Rails.application.routes.draw do
+  # V1 API
   namespace :v1 do
-    resources :sources do
-      resources :articles, only: %i[show index] do
-        resource :content, only: :show
-      end
 
+    # Sources routes
+    resources :sources do
+      resources :articles, only: %i[show index]
       resources :tags, only: %i[show index]
+
+      member do
+        get 'update' => 'sources#update_articles'
+        get 'clear'
+        get 'reset'
+      end
     end
 
-    get '/sources/:id/update', to: 'sources#update_articles'
-    get '/sources/:id/clear', to: 'sources#clear'
-    get '/sources/:id/reset', to: 'sources#reset'
-
+    # Articles routes
     resources :articles, only: %i[show index] do
       resource :content, only: :show
     end
 
-    get '/tags/clean', to: 'tags#clean'
+    # Tags routes
     resources :tags do
-      resources :sources, only: %i[show index] do
-        resources :articles, only: %i[show index] do
-          resource :content, only: :show
-        end
-      end
+      resources :sources, only: %i[show index]
+      resources :articles, only: %i[show index]
+      get 'clean'
     end
 
-    post 'authenticate', to: 'authentication#authenticate'
+    post 'authenticate' => 'authentication#authenticate'
   end
 end

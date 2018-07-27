@@ -20,10 +20,10 @@ Rails.application.routes.draw do
     end
 
     # Tags routes
+    get '/tags/clean'
     resources :tags do
       resources :sources, only: %i[show index]
       resources :articles, only: %i[show index]
-      get 'clean'
     end
 
     post 'authenticate' => 'authentication#authenticate'

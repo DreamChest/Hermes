@@ -56,16 +56,8 @@ module V1
 
     # White list for articles collection requests
     def articles_params
-      params.permit(
-        :id,
-        :source_id,
-        :sources,
-        :tags,
-        :since,
-        :until,
-        :limit,
-        :content
-      )
+      params.permit(:id, :source_id, :tag_id, :sources, :tags, :since, :until,
+                    :limit, :content)
     end
   end
 end

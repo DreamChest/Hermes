@@ -20,20 +20,14 @@ module V1
       @tag = Tag.new(tag_params)
       @tag.user = current_user
 
-      if @tag.save
-        render json: @tag, status: :created
-      else
-        render json: @tag.errors, status: :unprocessable_entity
-      end
+      return render json: @tag, status: :created if @tag.save
+      render json: @tag.errors, status: :unprocessable_entity
     end
 
     # PATCH/PUT /tags/1
     def update
-      if @tag.update(tag_params)
-        render json: @tag
-      else
-        render json: @tag.errors, status: :unprocessable_entity
-      end
+      return render json: @tag if @tag.update(tag_params)
+      render json: @tag.errors, status: :unprocessable_entity
     end
 
     # DELETE /tags/1

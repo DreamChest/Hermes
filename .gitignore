@@ -28,4 +28,6 @@ public/assets/favicons
 
 # Other
 erd.pdf
-.secret_key_base
+
+# Database config
+config/database.yml

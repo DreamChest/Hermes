@@ -65,6 +65,7 @@ task :deploy do
     on :launch do
       in_path(fetch(:current_path)) do
         command %(mkdir -p tmp/)
+        command %(mkdir -p tmp/sockets/)
         command %(touch tmp/restart.txt)
       end
     end

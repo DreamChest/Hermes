@@ -1,40 +1,56 @@
 # Hermes
 
-Hermes is the backend API for the new version of Prophet RSS reader. For the front-end, see [Mercury][1].
+Hermes is the backend API for [Prophet][1]. For the front-end, see [Mercury][2]. For the mobile app see [Trivia][3].
 
-**Disclaimer**: Hermes (and all components of the new version of Prophet) is still under heavy development and the ["classical" version][2] of Prophet is still considered to be the stable, production-ready version.
-
-[1]: https://github.com/DreamChest/Mercury
-[2]: https://github.com/DreamChest/Prophet
-[3]: https://github.com/DreamChest/Prophet-Mobile
+[1]: https://github.com/DreamChest/Prophet
+[2]: https://github.com/DreamChest/Mercury
+[3]: https://github.com/DreamChest/Trivia
 [4]: https://documenter.getpostman.com/view/3934007/hermes/RVnZhyJS
 [5]: https://github.com/DreamChest/Mercury/blob/master/LICENSE
 
-## Requirements
+## Quickstart
 
--   Ruby 2.4.x
--   Rails 5.1.x
--   ImageMagick (or at least MagickCore and MagickWand libs)
+### Requirements
 
-## Installation
+- Ruby 2.4.x
+- Rails 5.1.x
+- ImageMagick (or at least MagickCore and MagickWand libs)
+- PostgreSQL & libpq
 
-To install Hermes, make sure to meet the above requirements and get the current stable release with :
+For Ruby installation, RVM (or equivalent) is recommended.
+
+### Installation
+
+To install Hermes, make sure to meet the above requirements and get the current stable release with:
 
 `$ git clone https://github.com/DreamChest/Hermes && cd Hermes`
 
-Then you have to generate a secret key, install the project Gems and migrate the database, which can all be done by running `./scripts/install.sh`.
+### Configuration
 
-More installation options coming soon.
+#### Database config
 
-## Configuration
+You need to place your database config at **config/database.yml**, a sample config file is located at **config/database.example.yml**.
 
-For now, the only needed configuration for the API is the creation of a user, you can create one by running `rake user:create\[email,password\]`, replacing email by an email and password by the wanted password.
+You can then setup the database with `RAILS_ENV=production rake db:setup`.
 
-## Usage
+#### Secrets config
 
-You can run the server simply by using `./scripts/run.sh --run`. This script also offers the *--stop* and *--restart* options.
+To run Hermes you need to generate an encrypted secrets file with `rails secrets:setup` and then edit the encrypted file with `rails secrets:edit`. The file should at least contain:
 
-Once Hermes is up, you should be able to send it requests and configure either [Mercury][1] or [Prophet-Mobile][3] to connect to it.
+```
+production:
+  secret_key_base: <key>
+```
+
+Replace *<key\>* with a secret key which can be generated with `rake secret`.
+
+#### User management
+
+tbd
+
+### Usage
+
+You can start Hermes with `rails server -e production`.
 
 ## API Documentation
 

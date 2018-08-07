@@ -10,7 +10,7 @@ threads threads_count, threads_count
 # Specifies the `port` that Puma will listen on to receive requests.
 #
 # port ENV.fetch('PORT') { 3000 }
-bind 'unix://tmp/puma.sock'
+bind 'unix:///var/run/hermes.sock'
 
 # Specifies the `environment` that Puma will run in.
 #

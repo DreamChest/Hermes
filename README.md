@@ -12,8 +12,8 @@ Hermes is the backend API for the new version of Prophet RSS reader. For the fro
 
 ## Requirements
 
--   Ruby 2.2+
--   Rails 5.1+
+-   Ruby 2.4.x
+-   Rails 5.1.x
 -   ImageMagick (or at least MagickCore and MagickWand libs)
 
 ## Installation

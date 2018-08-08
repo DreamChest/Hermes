@@ -6,9 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-u1 = User.create(email: 'admin@foobar.com', password: 'admin', password_confirmation: 'admin')
-u2 = User.create(email: 'user@foobar.com', password: 'user', password_confirmation: 'user')
+if Rails.env.development?
+  u1 = User.create(email: 'admin@foobar.com', password: 'admin', password_confirmation: 'admin')
+  u2 = User.create(email: 'user@foobar.com', password: 'user', password_confirmation: 'user')
 
-s1 = u1.sources.create(name: 'Korben', url: 'https://korben.info/feed', tags_string: 'tech blog')
-s2 = u1.sources.create(name: 'Slashdot', url: 'http://rss.slashdot.org/Slashdot/slashdotMain', tags_string: 'tech')
-s3 = u2.sources.create(name: 'Atom Packages', url: 'https://atom.io/packages.atom', tags_string: 'tech')
+  u1.sources.create(name: 'Korben', url: 'https://korben.info/feed', tags_string: 'tech blog')
+  u1.sources.create(name: 'Slashdot', url: 'http://rss.slashdot.org/Slashdot/slashdotMain', tags_string: 'tech')
+  u2.sources.create(name: 'Atom Packages', url: 'https://atom.io/packages.atom', tags_string: 'tech')
+end

@@ -1,76 +1,107 @@
 require 'test_helper'
 
 class SourceTest < ActiveSupport::TestCase
-  test 'validations valid' do
-    1.upto(5) { |i| assert(sources("source_#{i}").valid?) }
+  test 'sources validity' do
+    assert_valid(sources(:valid))
+    assert_valid(sources(:another_valid))
   end
 
-  test 'validations attributes presence' do
-    sources(:missing_user, :missing_name, :missing_url).each do |s|
-      assert_not(s.valid?)
-    end
+  test 'name presence' do
+    assert_invalid(sources(:missing_name))
   end
 
-  test 'validations attributes uniqueness' do
-    sources(:duplicate_base, :duplicate_name, :duplicate_url).each do |s|
-      assert_not(s.valid?)
-    end
+  test 'url presence' do
+    assert_invalid(sources(:missing_url))
   end
 
-  test 'validations URL validity' do
-    sources(:url_not_url, :url_not_feed).each { |s| assert_not(s.valid?) }
+  test 'name uniquess' do
+    assert_invalid(sources(:duplicate_name))
   end
 
-  test 'tags attribution' do
-    sources(:source_1).tag(tags(:tag_1, :tag_2))
-
-    assert_equal(2, sources(:source_1).tags.count)
-    assert_includes(sources(:source_1).tags, tags(:tag_1))
-    assert_includes(sources(:source_1).tags, tags(:tag_2))
+  test 'url uniquess' do
+    assert_invalid(sources(:duplicate_url))
   end
 
-  test 'tag filtering' do
-    sources(:source_1).tag([tags(:tag_1)])
-
-    assert_includes(Source.filter_by_tag(tags(:tag_1)), sources(:source_1))
+  test 'url is an url' do
+    assert_invalid(sources(:invalid_url))
   end
 
-  test 'feed fetching' do
-    assert(sources(:source_1).fetch)
-    assert_not_nil(sources(:source_1).feed)
+  test 'url is a feed' do
+    assert_invalid(sources(:invalid_feed))
   end
 
-  test 'feed extraction' do
-    sources(:source_1).fetch
+  test 'source tagging' do
+    source = sources(:valid)
+    tags_string = 'tag1 tag2'
 
-    assert_instance_of(Array, sources(:source_1).extract)
-    assert_not_empty(sources(:source_1).extract)
+    source.update(tags_string: tags_string)
+
+    assert_not_empty(source.tags)
+    assert_equal(source.tags, source.user.tags.parse_str(tags_string))
   end
 
-  test 'feed articles saving' do
-    sources(:source_1).fetch
-    sources(:source_1).extract
+  test 'favicon url default presence' do
+    source = sources(:valid)
 
-    assert(sources(:source_1).save_articles)
-    assert_not_empty(sources(:source_1).articles)
-    assert_includes(sources(:source_1).articles, sources(:source_1).new_articles.sample)
+    source.save
+
+    assert_not_nil(source.favicon_url)
   end
 
-  test 'source clearing' do
-    sources(:source_1).fetch
-    sources(:source_1).extract
-    sources(:source_1).save_articles
-    sources(:source_1).clear
+  test 'favicon fetching' do
+    source = sources(:valid)
 
-    assert_empty(sources(:source_1).articles)
+    source.save
+
+    assert_not_nil(source.favicon_path)
+    assert(File.exist?("public/#{source.favicon_path}"))
   end
 
-  test 'source reseting' do
-    sources(:source_1).fetch
-    sources(:source_1).extract
-    sources(:source_1).save_articles
-    sources(:source_1).reset
+  test 'favicon deletion' do
+    source = sources(:valid)
 
-    assert_equal(Time.at(0).utc, sources(:source_1).last_update)
+    source.save
+    source.destroy
+
+    assert_not(File.exist?("public/#{source.favicon_path}"))
+  end
+
+  test 'tags filtering' do
+    source = sources(:valid)
+
+    source.update(tags_string: 'tag1 tag2')
+
+    assert_includes(Source.with_tag('tag1'), source)
+    assert_includes(Source.with_tag('tag2'), source)
+  end
+
+  test 'new articles' do
+    assert_not_empty(sources(:valid).new_articles)
+  end
+
+  test 'articles update' do
+    source = sources(:valid)
+
+    assert(source.update_articles)
+    assert_not_empty(source.articles)
+  end
+
+  test 'article clearing' do
+    source = sources(:valid)
+
+    source.update_articles
+
+    assert(source.clear)
+    assert_empty(source.articles)
+  end
+
+  test 'source resett' do
+    source = sources(:valid)
+
+    source.update_articles
+
+    assert(source.reset)
+    assert_empty(source.articles)
+    assert_equal(Time.at(0).utc, source.last_update)
   end
 end

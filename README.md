@@ -1,14 +1,17 @@
 <div align="center">
   <h1>Hermes</h1>
 </div>
-<hr/>
-<p align="center">
-  **API backend for Prophet**
-</p>
 <div align="center">
-  [![Ruby Version](https://img.shields.io/badge/Ruby-2.4.4-red.svg)](https://www.ruby-lang.org/en/)
-  [![Rails Version](https://img.shields.io/badge/Rails-5.1.5-red.svg)](https://rubyonrails.org/)
-  [![Build Status](https://travis-ci.com/DreamChest/Hermes.svg?branch=dev)](https://travis-ci.com/DreamChest/Hermes)
+  <p><strong>API backend for Prophet</strong></p>
+  <a href="https://www.ruby-lang.org/en/">
+    <img src="https://img.shields.io/badge/Ruby-2.4.4-red.svg"/>
+  </a>
+  <a href="https://rubyonrails.org/">
+    <img src="https://img.shields.io/badge/Rails-5.1.5-red.svg"/>
+  </a>
+  <a href="https://travis-ci.com/DreamChest/Hermes">
+    <img src="https://travis-ci.com/DreamChest/Hermes.svg?branch=dev"/>
+  </a>
 </div>
 
 [1]: https://github.com/DreamChest/Prophet

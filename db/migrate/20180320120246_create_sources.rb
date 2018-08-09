@@ -1,7 +1,7 @@
 class CreateSources < ActiveRecord::Migration[5.1]
   def change
     create_table :sources do |t|
-      t.integer :user_id
+      t.belongs_to :user
       t.string :name
       t.string :url
       t.string :favicon_url

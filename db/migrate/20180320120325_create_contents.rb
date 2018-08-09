@@ -1,7 +1,7 @@
 class CreateContents < ActiveRecord::Migration[5.1]
   def change
     create_table :contents do |t|
-      t.integer :article_id
+      t.belongs_to :article
       t.text :html
 
       t.timestamps

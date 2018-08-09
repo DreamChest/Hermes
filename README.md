@@ -1,6 +1,15 @@
-# Hermes
-
-Hermes is the backend API for [Prophet][1]. For the front-end, see [Mercury][2]. For the mobile app see [Trivia][3].
+<div align="center">
+  <h1>Hermes</h1>
+</div>
+<hr/>
+<p align="center">
+  **API backend for Prophet**
+</p>
+<div align="center">
+  [![Ruby Version](https://img.shields.io/badge/Ruby-2.4.4-red.svg)](https://www.ruby-lang.org/en/)
+  [![Rails Version](https://img.shields.io/badge/Rails-5.1.5-red.svg)](https://rubyonrails.org/)
+  [![Build Status](https://travis-ci.com/DreamChest/Hermes.svg?branch=dev)](https://travis-ci.com/DreamChest/Hermes)
+</div>
 
 [1]: https://github.com/DreamChest/Prophet
 [2]: https://github.com/DreamChest/Mercury

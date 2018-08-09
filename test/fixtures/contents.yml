@@ -1,1 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+valid:
+  id: 1
+  article_id: 1
+  html: foo
+
+missing_html:
+  article_id: 1

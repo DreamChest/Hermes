@@ -12,8 +12,11 @@
 
 ActiveRecord::Schema.define(version: 20180723202353) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "articles", force: :cascade do |t|
-    t.integer "source_id"
+    t.bigint "source_id"
     t.string "title"
     t.datetime "date"
     t.string "url"
@@ -21,16 +24,18 @@ ActiveRecord::Schema.define(version: 20180723202353) do
     t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["source_id"], name: "index_articles_on_source_id"
   end
 
   create_table "contents", force: :cascade do |t|
-    t.integer "article_id"
+    t.bigint "article_id"
     t.text "html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_contents_on_article_id"
   end
 
-  create_table "friendly_id_slugs", force: :cascade do |t|
+  create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -43,7 +48,7 @@ ActiveRecord::Schema.define(version: 20180723202353) do
   end
 
   create_table "sources", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "name"
     t.string "url"
     t.string "favicon_url"
@@ -51,19 +56,23 @@ ActiveRecord::Schema.define(version: 20180723202353) do
     t.datetime "last_update", default: "1970-01-01 00:00:00"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sources_on_user_id"
   end
 
   create_table "sources_tags", id: false, force: :cascade do |t|
-    t.integer "source_id", null: false
-    t.integer "tag_id", null: false
+    t.bigint "source_id", null: false
+    t.bigint "tag_id", null: false
+    t.index ["source_id", "tag_id"], name: "index_sources_tags_on_source_id_and_tag_id"
+    t.index ["tag_id", "source_id"], name: "index_sources_tags_on_tag_id_and_source_id"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "name"
     t.string "color", default: "#ffffff"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

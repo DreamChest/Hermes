@@ -1,34 +1,37 @@
 require 'test_helper'
 
 class TagTest < ActiveSupport::TestCase
-  test 'validations valid' do
-    1.upto(5) { |i| assert(tags("tag_#{i}").valid?) }
+  test 'tags validity' do
+    assert_valid(tags(:valid))
   end
 
-  test 'validation attribute presence' do
-    assert_not(tags(:missing_name).valid?)
+  test 'name presence' do
+    assert_invalid(tags(:missing_name))
   end
 
-  test 'validations attribute uniqueness' do
-    tags(:duplicate_base, :duplicate_name).each do |t|
-      assert_not(t.valid?)
-    end
-  end
-
-  test 'validations name validity' do
-    assert_not(tags(:invalid_name).valid?)
+  test 'name uniquess' do
+    tags(:duplicate_name1, :duplicate_name2).each { |t| assert_invalid(t) }
   end
 
   test 'source filtering' do
-    sources(:source_1).tag([tags(:tag_1)])
+    source = sources(:valid)
+    tag = tags(:valid)
+    user = tag.user
 
-    assert_includes(Tag.filter_by_source(sources(:source_1)), tags(:tag_1))
+    assert_equal(user, source.user) # The test is irrelevant otherwise
+
+    source.update(tags_string: tag.name)
+
+    assert_includes(user.tags.from_source(source.name), tag)
   end
 
-  test 'tags cleaning' do
-    sources(:source_1).tag([tags(:tag_1)])
-    Tag.clean
+  test 'tags cleanup' do
+    source = sources(:valid)
 
-    assert_equal(1, Tag.count)
+    assert_empty(Tag.clean)
+
+    source.update(tags_string: 'tag1')
+
+    assert_not_empty(Tag.clean)
   end
 end

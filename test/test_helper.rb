@@ -6,5 +6,26 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  NB_USERS = 1
+
+  # Ensures that obj.valid? is true
+  # @param obj [Object] Object on which to test validity
+  # @param msg [String] Optionnal message in case of error
+  def assert_valid(obj, msg = "#{obj.class} should be valid")
+    assert(obj.valid?, msg)
+  end
+
+  # Ensures that obj.valid? is false
+  # @param obj [Object] Object on which to test non validity
+  # @param msg [String] Optionnal message in case of error
+  def assert_invalid(obj, msg = "#{obj.class} should be invalid")
+    assert_not(obj.valid?, msg)
+  end
+
+  # Ensures that obj.count == expected
+  # @param expected [Integer] expected count of elements in obj
+  # @param obj object to count elements from
+  def assert_count(expected, obj)
+    assert_equal(expected, obj.count)
+  end
 end

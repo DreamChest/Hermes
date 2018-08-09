@@ -1,13 +1,46 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# Many valid articles
-<% 1.upto(50) do |i| %>
-article_<%= i %>:
-  id: <%= i %>
+valid:
+  id: 1
   source_id: 1
-  title: article_<%= i %>
+  title: valid
   date: <%= Time.now %>
   url: foo
-  read: false
-  favorite: false
-<% end %>
+
+another_valid:
+  id: 2
+  source_id: 2
+  title: another_valid
+  date: <%= Time.now %>
+  url: foo
+
+missing_title:
+  source_id: 1
+  date: <%= Time.now %>
+  url: foo
+
+missing_date:
+  source_id: 1
+  title: missing_date
+  url: foo
+
+missing_url:
+  source_id: 1
+  title: missing_url
+  date: <%= Time.now %>
+
+date_1:
+  source_id: 1
+  title: date_1
+  date: <%= Time.now %>
+  url: foo
+
+date_2:
+  source_id: 1
+  title: date_2
+  date: <%= Time.now + 1.days %>
+  url: foo
+
+date_3:
+  source_id: 1
+  title: date_3
+  date: <%= Time.now + 2.days %>
+  url: foo

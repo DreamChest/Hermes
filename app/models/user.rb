@@ -16,5 +16,5 @@ class User < ApplicationRecord
   end
   has_many :articles, through: :sources
 
-  validates :email, presence: true, email: true
+  validates :email, presence: true, uniqueness: true, email: true
 end

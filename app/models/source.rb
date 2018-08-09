@@ -27,7 +27,7 @@ class Source < ApplicationRecord
   before_destroy :remove_favicon
 
   scope :with_tag, (lambda do |tag|
-    joins(:tags).where('tags.id = :id or tags.name = :id', id: tag)
+    joins(:tags).where('tags.id = ? or tags.name = ?', tag.to_i, tag)
   end)
 
   # New articles (since last update)

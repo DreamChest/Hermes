@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # V1 API
   namespace :v1 do
-
     # Sources routes
     resources :sources do
       resources :articles, only: %i[show index]

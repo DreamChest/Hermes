@@ -17,6 +17,7 @@ require 'rails/test_unit/railtie'
 Bundler.require(*Rails.groups)
 
 module Hermes
+  # Main app class
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
@@ -32,7 +33,7 @@ module Hermes
 
     # Create favicon dir if needed
     config.after_initialize do
-      FileUtils.mkdir_p(Hermes::FAVICON_BASE_DIR) unless File.exist?(Hermes::FAVICON_BASE_DIR)
+      FileUtils.mkdir_p(FAVICON_BASE_DIR) unless File.exist?(FAVICON_BASE_DIR)
     end
 
     # Cors support

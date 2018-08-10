@@ -12,8 +12,7 @@ module V1
 
     # GET /articles/1
     def show
-      return render json: @article.to_json(include: :content) if articles_params[:content]
-      render json: @article
+      render json: @article.to_json(include: includes)
     end
 
     private
@@ -26,6 +25,12 @@ module V1
     # Criterias for tags filtering
     def tags_crit
       articles_params[:tags]
+    end
+
+    # Elements to include in the JSON
+    def includes
+      inc = []
+      inc << 'content' if articles_params[:content]
     end
 
     # Filtered artiles (by source or tags, if any)

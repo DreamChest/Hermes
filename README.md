@@ -34,8 +34,6 @@
 </div>
 
 [1]: https://github.com/DreamChest/Prophet
-[2]: https://github.com/DreamChest/Mercury
-[3]: https://github.com/DreamChest/Trivia
 [4]: https://documenter.getpostman.com/view/3934007/hermes/RVnZhyJS
 [5]: https://github.com/DreamChest/Mercury/blob/master/LICENSE
 

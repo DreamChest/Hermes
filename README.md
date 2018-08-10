@@ -136,7 +136,7 @@ If you find any bugs or issues with Hermes, you can submit an issue. Any issue s
 
 ## Status
 
-Branch | Travis CI | Codebeat | Inch CI | Note
+Branch | Travis CI | Codacy | Inch CI | Note
 -------|-----------|----------|---------|-----
 master | [![Build Status][6]][7] | [![Codacy Badge][8]][9] | [![Inline docs][10]][11] | Stable release
 next | [![Build Status][12]][7] | [![Codacy Badge][13]][9] | [![Inline docs][14]][11] | Next release

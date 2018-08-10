@@ -1,17 +1,36 @@
 <div align="center">
   <h1>Hermes</h1>
-</div>
-<div align="center">
-  <p><strong>API backend for Prophet</strong></p>
+
+  <p>
+    <strong>API backend for <a href="https://github.com/DreamChest/Prophet">Prophet</a></strong>
+  </p>
+
   <a href="https://www.ruby-lang.org/en/">
     <img src="https://img.shields.io/badge/Ruby-2.4.4-red.svg"/>
   </a>
+
   <a href="https://rubyonrails.org/">
     <img src="https://img.shields.io/badge/Rails-5.1.5-red.svg"/>
   </a>
+
   <a href="https://travis-ci.com/DreamChest/Hermes">
-    <img src="https://travis-ci.com/DreamChest/Hermes.svg?branch=dev"/>
+    <img src="https://travis-ci.com/DreamChest/Hermes.svg?branch=master"/>
   </a>
+
+  <a class="badge-align" href="https://www.codacy.com/app/Sudiukil/Hermes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DreamChest/Hermes&amp;utm_campaign=Badge_Grade">
+    <img src="https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=master"/>
+  </a>
+
+  <a href="https://inch-ci.org/github/DreamChest/Hermes?branch=master">
+    <img src="http://inch-ci.org/github/DreamChest/Hermes.svg?branch=master">
+  </a>
+
+  <br/>
+  <br/>
+
+  <p>
+    This is the API component of the Prophet RSS reader web app. For more informations about Prophet see the <a href="https://github.com/DreamChest/Prophet">main repo</a>.
+  </p>
 </div>
 
 [1]: https://github.com/DreamChest/Prophet
@@ -19,6 +38,22 @@
 [3]: https://github.com/DreamChest/Trivia
 [4]: https://documenter.getpostman.com/view/3934007/hermes/RVnZhyJS
 [5]: https://github.com/DreamChest/Mercury/blob/master/LICENSE
+
+[7]: https://travis-ci.com/DreamChest/Hermes
+[9]: https://www.codacy.com/project/Sudiukil/Hermes/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DreamChest/Hermes&amp;utm_campaign=Badge_Grade_Dashboard
+[11]: http://inch-ci.org/github/DreamChest/Hermes
+
+[6]: https://travis-ci.com/DreamChest/Hermes.svg?branch=master
+[12]: https://travis-ci.com/DreamChest/Hermes.svg?branch=next
+[15]: https://travis-ci.com/DreamChest/Hermes.svg?branch=dev
+
+[8]: https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=master
+[13]: https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=next
+[16]: https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=dev
+
+[10]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=master
+[14]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=next
+[17]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=dev
 
 ## Quickstart
 
@@ -90,14 +125,22 @@ If you want to contribute code to this project, please follow these steps:
 
 - Open a GitHub issue to let us know what you are working on
 - Fork the project
-- Make sure the dev branch of your fork is up to date with ours
-- Create a new branch on your fork, based on the dev branch
-- Once your work is done, make sure your dev branch is still up to date and merge your changes on it
+- Make sure the **dev** branch of your fork is up to date with ours
+- Create a new branch on your fork, based on the **dev** branch
+- Once your work is done, make sure your **dev** branch is still up to date and merge your changes on it
 - Open a pull a request to this repository contributions branch
 
 ## Bugs
 
 If you find any bugs or issues with Hermes, you can submit an issue. Any issue suggesting features or improvements are also welcome!
+
+## Status
+
+Branch | Travis CI | Codebeat | Inch CI | Note
+-------|-----------|----------|---------|-----
+master | [![Build Status][6]][7] | [![Codacy Badge][8]][9] | [![Inline docs][10]][11] | Stable release
+next | [![Build Status][12]][7] | [![Codacy Badge][13]][9] | [![Inline docs][14]][11] | Next release
+dev | [![Build Status][15]][7] | [![Codacy Badge][16]][9] | [![Inline docs][17]][11] | Dev build
 
 ## License
 

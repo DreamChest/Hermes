@@ -14,19 +14,19 @@
   </a>
 
   <a href="https://travis-ci.com/DreamChest/Hermes">
-    <img src="https://travis-ci.com/DreamChest/Hermes.svg?branch=master"/>
+    <img src="https://travis-ci.com/DreamChest/Hermes.svg?branch=dev"/>
   </a>
 
   <a class="badge-align" href="https://www.codacy.com/app/Sudiukil/Hermes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DreamChest/Hermes&amp;utm_campaign=Badge_Grade">
-    <img src="https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=master"/>
+    <img src="https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=dev"/>
   </a>
 
   <a class="badge-align" href="https://www.codacy.com/app/Sudiukil/Hermes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DreamChest/Hermes&amp;utm_campaign=Badge_Coverage">
-    <img src="https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=master"/>
+    <img src="https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=dev"/>
   </a>
 
-  <a href="https://inch-ci.org/github/DreamChest/Hermes?branch=master">
-    <img src="http://inch-ci.org/github/DreamChest/Hermes.svg?branch=master">
+  <a href="https://inch-ci.org/github/DreamChest/Hermes">
+    <img src="http://inch-ci.org/github/DreamChest/Hermes.svg?branch=dev">
   </a>
 
   <br/>
@@ -40,26 +40,6 @@
 [1]: https://github.com/DreamChest/Prophet
 [4]: https://documenter.getpostman.com/view/3934007/hermes/RVnZhyJS
 [5]: https://github.com/DreamChest/Mercury/blob/master/LICENSE
-
-[7]: https://travis-ci.com/DreamChest/Hermes
-[9]: https://www.codacy.com/project/Sudiukil/Hermes/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DreamChest/Hermes&amp;utm_campaign=Badge_Grade_Dashboard
-[11]: http://inch-ci.org/github/DreamChest/Hermes
-
-[6]: https://travis-ci.com/DreamChest/Hermes.svg?branch=master
-[12]: https://travis-ci.com/DreamChest/Hermes.svg?branch=next
-[15]: https://travis-ci.com/DreamChest/Hermes.svg?branch=dev
-
-[8]: https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=master
-[13]: https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=next
-[16]: https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=dev
-
-[10]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=master
-[14]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=next
-[17]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=dev
-
-[18]: https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=master
-[19]: https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=next
-[20]: https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=dev
 
 ## Quickstart
 
@@ -139,14 +119,6 @@ If you want to contribute code to this project, please follow these steps:
 ## Bugs
 
 If you find any bugs or issues with Hermes, you can submit an issue. Any issue suggesting features or improvements are also welcome!
-
-## Status
-
-Branch | Travis CI | Codacy | Inch CI | Note
--------|-----------|----------|---------|-----
-master | [![Build Status][6]][7] | [![Codacy Badge][8]][9] [![Coverage Badge][18]][9] | [![Inline docs][10]][11] | Stable release
-next | [![Build Status][12]][7] | [![Codacy Badge][13]][9] [![Coverage Badge][19]][9] | [![Inline docs][14]][11] | Next release
-dev | [![Build Status][15]][7] | [![Codacy Badge][16]][9] [![Coverage Badge][20]][9] | [![Inline docs][17]][11] | Dev build
 
 ## License
 

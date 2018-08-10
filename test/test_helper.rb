@@ -1,3 +1,10 @@
+require 'simplecov'
+require 'codacy-coverage'
+
+formatters = [SimpleCov::Formatter::HTMLFormatter, Codacy::Formatter]
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(formatters)
+SimpleCov.start('rails')
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'

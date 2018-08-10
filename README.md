@@ -21,6 +21,10 @@
     <img src="https://api.codacy.com/project/badge/Grade/766d665c6c2f44fc89fde16cdc03135c?branch=master"/>
   </a>
 
+  <a class="badge-align" href="https://www.codacy.com/app/Sudiukil/Hermes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DreamChest/Hermes&amp;utm_campaign=Badge_Coverage">
+    <img src="https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=master"/>
+  </a>
+
   <a href="https://inch-ci.org/github/DreamChest/Hermes?branch=master">
     <img src="http://inch-ci.org/github/DreamChest/Hermes.svg?branch=master">
   </a>
@@ -52,6 +56,10 @@
 [10]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=master
 [14]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=next
 [17]: http://inch-ci.org/github/DreamChest/Hermes.svg?branch=dev
+
+[18]: https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=master
+[19]: https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=next
+[20]: https://api.codacy.com/project/badge/Coverage/766d665c6c2f44fc89fde16cdc03135c?branch=dev
 
 ## Quickstart
 
@@ -136,9 +144,9 @@ If you find any bugs or issues with Hermes, you can submit an issue. Any issue s
 
 Branch | Travis CI | Codacy | Inch CI | Note
 -------|-----------|----------|---------|-----
-master | [![Build Status][6]][7] | [![Codacy Badge][8]][9] | [![Inline docs][10]][11] | Stable release
-next | [![Build Status][12]][7] | [![Codacy Badge][13]][9] | [![Inline docs][14]][11] | Next release
-dev | [![Build Status][15]][7] | [![Codacy Badge][16]][9] | [![Inline docs][17]][11] | Dev build
+master | [![Build Status][6]][7] | [![Codacy Badge][8]][9] [![Coverage Badge][18]][9] | [![Inline docs][10]][11] | Stable release
+next | [![Build Status][12]][7] | [![Codacy Badge][13]][9] [![Coverage Badge][19]][9] | [![Inline docs][14]][11] | Next release
+dev | [![Build Status][15]][7] | [![Codacy Badge][16]][9] [![Coverage Badge][20]][9] | [![Inline docs][17]][11] | Dev build
 
 ## License
 

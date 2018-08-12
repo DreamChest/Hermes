@@ -1,6 +1,9 @@
 # Main controller class
 class ApplicationController < ActionController::API
   before_action :authenticate_request
+
+  # Getter for current_user
+  # @return the current user
   attr_reader :current_user
 
   private

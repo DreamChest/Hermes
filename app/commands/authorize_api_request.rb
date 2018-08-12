@@ -3,6 +3,8 @@
 class AuthorizeApiRequest
   prepend SimpleCommand
 
+  # Initialize the API by reading the request headers
+  # @param headers request headers to read
   def initialize(headers = {})
     @headers = headers
   end

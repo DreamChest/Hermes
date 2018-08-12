@@ -13,6 +13,9 @@ class Source < ApplicationRecord
   validates :name, :url, presence: true, uniqueness: { scope: :user_id }
   validates :url, url: true, feed: true
 
+  # Getter and setter for the tags_string attribute
+  # tags_string is a space separated list of tags for the source
+  # @return the string of tags
   attr_accessor :tags_string
 
   before_save unless: proc { tags_string.nil? } do

@@ -12,7 +12,7 @@ require 'mina/rvm' # for rvm support. (https://rvm.io)
 set :application_name, 'hermes'
 set :domain, 'sudiukil.info'
 set :deploy_to, '/home/hermes/hermes'
-set :repository, 'https://git.sudiukil.info/Sudiukil/Hermes'
+set :repository, 'https://github.com/DreamChest/Hermes'
 set :branch, 'next'
 
 # Optional settings:

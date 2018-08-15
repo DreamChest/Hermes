@@ -15,9 +15,6 @@ class Article < ApplicationRecord
   end)
 
   scope :with_tags, (lambda do |tags|
-    joins('
-      inner join sources_tags on articles.source_id = sources_tags.source_id
-      inner join tags on sources_tags.tag_id = tags.id
-    ').where('tags.name in (?)', tags).distinct
+    joins(:tags).where('tags.name in (?)', tags).distinct
   end)
 end

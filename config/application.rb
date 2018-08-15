@@ -45,6 +45,10 @@ module Hermes
     end
   end
 
+  # App version numbers
+  APP_VERSION = `git describe --tags --abbrev=0`.squish || 'unknown'
+  API_VERSION = '1'.freeze
+
   ## Favicons constants
   FAVICON_TEMP_PATH = Rails.root.join('tmp/favicon.ico').freeze
   FAVICON_BASE_URL = '/assets/favicons'.freeze

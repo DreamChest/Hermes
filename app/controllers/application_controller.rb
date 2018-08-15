@@ -6,6 +6,14 @@ class ApplicationController < ActionController::API
   # @return the current user
   attr_reader :current_user
 
+  # Render app and api versions
+  def version
+    render json: {
+      app_version: Hermes::APP_VERSION,
+      api_version: Hermes::API_VERSION
+    }
+  end
+
   private
 
   # Authenticate incoming requests

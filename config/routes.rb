@@ -27,4 +27,6 @@ Rails.application.routes.draw do
 
     post 'authenticate' => 'authentication#authenticate'
   end
+
+  get 'version' => 'application#version'
 end
